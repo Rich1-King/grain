@@ -1,0 +1,124 @@
+﻿<igFramework:SampleContainer x:Class="WpfApplication6.Editing.ChartScrollIntoView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="500" d:DesignWidth="700"
+      Title="ChartScrollIntoView Page"
+      xmlns:controls="clr-namespace:WpfApplication6"
+      xmlns:ig="http://schemas.infragistics.com/xaml"
+      xmlns:igFramework="clr-namespace:Infragistics.Samples.Framework;assembly=Infragistics.Samples.Framework"
+      xmlns:models="clr-namespace:WpfApplication6"
+      xmlns:resources="clr-namespace:WpfApplication6.Resources">
+
+    <igFramework:SampleContainer.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/WpfApplication6;component/Themes/IG/IG.xamDataChart.xaml" />
+                <!-- this loads IG styles for MS controls -->
+                <ResourceDictionary Source="/WpfApplication6;component/Assets/Global.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="AxisStripBrush" Color="LightGray" Opacity=".4"></SolidColorBrush>
+
+            <models:CategoryDataRandomSample x:Key="CategoryData">
+                <models:CategoryDataRandomSample.Settings>
+                    <models:CategoryDataSettings DataPoints="50" />
+                </models:CategoryDataRandomSample.Settings>
+            </models:CategoryDataRandomSample>
+
+            <ig:StringFormatConverter x:Key="StringFormatConverter" />
+
+            <resources:DataChartStrings x:Key="Strings" />
+            <DataTemplate x:Key="LegendItemDataTemplate">
+                <Grid />
+            </DataTemplate>
+            <DataTemplate x:Key="CircleMarkerTemplate">
+                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="30" MinHeight="30">
+                        <Ellipse Stretch="Fill" Fill="{Binding ActualItemBrush}" Stroke="{Binding Series.ActualItemBrush}" StrokeThickness="0.5">
+                        <Ellipse.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="5" Opacity="0.8" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse  Stretch="Fill" Fill="{Binding ActualItemBrush}" Stroke="{Binding Series.ActualItemBrush}" StrokeThickness="0.5"/>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="ListBoxItemTemplate">
+                <StackPanel Orientation="Horizontal" Margin="2,1,2,1">
+                    <TextBlock Text="{Binding Category}" />
+                    <TextBlock Text="" />
+                    <TextBlock Margin="2,0,2,0" Text="{Binding XWDC_ChartScrollIntoView_ItemValue, Source={StaticResource Strings}}" />
+                    <TextBlock Text=": " />
+                    <TextBlock Text="{Binding Value, Converter={StaticResource StringFormatConverter}, ConverterParameter='0'}" Width="30" />
+                </StackPanel>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </igFramework:SampleContainer.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White">
+
+        <!--#BEGIN SNIPPET#-->
+        <!-- ========================================================================== -->
+        <ig:XamDataChart x:Name="DataChart"
+                         HorizontalZoomable="True" HorizontalZoombarVisibility="Visible"
+                         VerticalZoomable="True" VerticalZoombarVisibility="Visible" HorizontalContentAlignment="Right"  VerticalContentAlignment="Bottom">
+            <ig:XamDataChart.Axes>
+                <ig:CategoryXAxis x:Name="categoryXAxis" Interval="1" ItemsSource="{StaticResource CategoryData}" Label="{}{Category}">
+                    <ig:CategoryXAxis.LabelSettings>
+                        <ig:AxisLabelSettings Visibility="Visible" Location="OutsideTop" Extent="20" />
+                    </ig:CategoryXAxis.LabelSettings>
+                </ig:CategoryXAxis>
+                <ig:NumericYAxis x:Name="numericYAxis" MinimumValue="-5"  Interval="5"  />
+            </ig:XamDataChart.Axes>
+            <ig:XamDataChart.Series>
+                <ig:LineSeries ItemsSource="{StaticResource CategoryData}"
+                               LegendItemBadgeTemplate="{StaticResource LegendItemDataTemplate}"
+                               Thickness="2"
+                               MarkerTemplate="{StaticResource CircleMarkerTemplate}"
+                               ValueMemberPath="Value"
+                               XAxis="{Binding ElementName=categoryXAxis}"
+                               YAxis="{Binding ElementName=numericYAxis}">
+                    <ig:LineSeries.ToolTip>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Item.Category}" />
+                                <TextBlock Text="." />
+                                <TextBlock Margin="2,0,2,0" Text="{Binding XWDC_ChartScrollIntoView_ItemValue, Source={StaticResource Strings}}" />
+                                <TextBlock Text=": " />
+                                <TextBlock Text="{Binding Item.Value, Converter={StaticResource StringFormatConverter}, ConverterParameter='0.0'}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </ig:LineSeries.ToolTip>
+                </ig:LineSeries>
+            </ig:XamDataChart.Series>
+        </ig:XamDataChart>
+        <!-- ========================================================================== -->
+        <!--#END SNIPPET#-->
+        <controls:OptionsPanel HeaderText="{Binding XWDC_DataChart_Options, Source={StaticResource Strings}}"
+                               HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,51,26,0">
+            <TextBlock Text="X轴"  Margin="2,5"  />
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="XAxisScrollSlider" TickFrequency="2" Value="0" Minimum="0" Maximum="{Binding Value ,ElementName=categoryXAxis}" Width="120" SmallChange="2" LargeChange="2" VerticalAlignment="Center" />
+                <TextBlock Name="text" Text="{Binding Value, ElementName=XAxisScrollSlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='0'}" VerticalAlignment="Center" Margin="2" Width="30"/>
+            </StackPanel>
+
+            <TextBlock Text="Y轴"  Margin="2,5,0,5"  />
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="YAxisScrollSlider" Value="0" Minimum="0" Width="120" SmallChange="5" LargeChange="5" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding Value, ElementName=YAxisScrollSlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='0'}" Margin="2" Width="30" VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding XWDC_ChartScrollIntoView_SeriesScrollIntoView, Source={StaticResource Strings}}"  Margin="2,5,0,5"  />
+                <TextBlock Text=":"  Margin="0,2,0,2" />
+            </StackPanel>
+            <ListBox x:Name="BubbleDataListBox"
+                     SelectionMode="Single"
+                     ItemsSource="{StaticResource CategoryData}"
+                     ItemTemplate="{StaticResource ListBoxItemTemplate}" Height="130" Width="160">
+            </ListBox>
+        </controls:OptionsPanel>
+    </Grid>
+</igFramework:SampleContainer>

@@ -1,0 +1,20 @@
+﻿<Page x:Class="BiaoShiPage.ZuiZhiBiaoShiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="20" d:DesignWidth="340"
+	Title="ZuiZhiBiaoShiPage">
+
+    <Grid HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="最大值标识轴:" Width="Auto" Height="23" HorizontalAlignment="Center" VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Top"  FontSize="11"></Label>
+            <Rectangle Width="30" Height="Auto" Fill="Red" Opacity="0.7"></Rectangle>
+            <Label Content="平均值标识轴:" Width="Auto" Height="23" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11"></Label>
+            <Rectangle Width="30" Height="Auto" Fill="Blue" Opacity="0.7"></Rectangle>
+            <Label Content="最小值标识轴:" Width="Auto" Height="23" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="11"></Label>
+            <Rectangle Width="30" Height="Auto" Fill="Black" Opacity="0.7"></Rectangle>
+        </StackPanel>
+    </Grid>
+</Page>

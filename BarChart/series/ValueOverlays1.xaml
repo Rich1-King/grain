@@ -1,0 +1,439 @@
+﻿<igFramework:SampleContainer x:Class="BarChart.series.ValueOverlays1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="398" d:DesignWidth="783"
+      Title="ValueOverlays Page"
+      xmlns:common="clr-namespace:BarChart.Calculators"
+      xmlns:controls="clr-namespace:BarChart"
+      xmlns:ig="http://schemas.infragistics.com/xaml"
+      xmlns:igFramework="clr-namespace:Infragistics.Samples.Framework;assembly=Infragistics.Samples.Framework"
+      xmlns:local="clr-namespace:BarChart.series"
+      xmlns:resources="clr-namespace:BarChart.Resources"
+      xmlns:other="clr-namespace:DataMember;assembly=DataMember" Loaded="SampleContainer_Loaded">
+    <igFramework:SampleContainer.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/BarChart;component/IG.xamDataChart.xaml" />
+                <!-- this loads IG styles for MS controls -->
+                <ResourceDictionary Source="/BarChart;component/Assets/Global.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ig:StringFormatConverter x:Key="StringFormatConverter" />
+            <resources:DataChartStrings x:Key="Strings" />
+            <other:DataSource x:Key="data"/>
+        </ResourceDictionary>
+    </igFramework:SampleContainer.Resources>
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="155*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Silver" BorderThickness="2" Background="#FFF1F1F1">
+            <Grid >             
+                    <Label x:Name="labTitle" FontSize="20" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+              
+             
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Silver" BorderThickness="2" Background="#FFF7F5F5">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="783*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Name="display" Grid.Column="2" Loaded="display_Load"/>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="129*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="1097*"/>
+            </Grid.ColumnDefinitions>
+
+            <ig:XamDataChart x:Name="DataChart"  HorizontalZoombarVisibility="Visible" VerticalZoombarVisibility="Visible"  VerticalZoomable="True" HorizontalZoomable="True" Visibility="Visible" Legend="{Binding ElementName=Legend}" Grid.Column="1" Grid.Row="0">
+                <!--#BEGIN SNIPPET#-->
+                <!-- ========================================================================== -->
+                <ig:XamDataChart.Resources>
+
+                    <!-- Calculators provided by Infragistics Math assembly -->
+                    <ig:MeanCalculator x:Key="MeanCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <ig:MedianCalculator x:Key="MedianCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <ig:VarianceCalculator x:Key="VarianceCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <!-- Custom Calculators that calculate lowest and highest values in ItemsSource (Y data column) -->
+                    <common:LowestCalculator x:Key="LowestCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <common:HighestCalculator x:Key="HighestCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                </ig:XamDataChart.Resources>
+                <!-- ========================================================================== -->
+                <!--#END SNIPPET#-->
+                <ig:XamDataChart.Axes>
+                    <ig:CategoryXAxis x:Name="categoryXAxis" Interval="1" Label="{}{date:MM/dd}" Tag="时间">
+                        <ig:CategoryXAxis.LabelSettings>
+                            <ig:AxisLabelSettings Location="OutsideBottom" Angle="1" Extent="13" VerticalAlignment="Center"  HorizontalAlignment="Center" />
+                        </ig:CategoryXAxis.LabelSettings>
+                    </ig:CategoryXAxis>
+                    <ig:NumericYAxis x:Name="numericYAxis" MinimumValue="20" MaximumValue="40"  Interval="2"/>
+                </ig:XamDataChart.Axes>
+                <ig:XamDataChart.Series >
+                    <ig:ColumnSeries Name="colRice" Title="Column Series" LegendItemTemplate="{x:Null}"
+                               
+                                 ValueMemberPath="GrainTemp"
+                                 Brush="Black"
+                                 Visibility="Visible"
+                                 XAxis="{Binding ElementName=categoryXAxis}"
+                                 YAxis="{Binding ElementName=numericYAxis}">
+                        <ig:ColumnSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="{StaticResource ChartSeriesBrush2}" BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:ColumnSeries.MarkerTemplate>
+                        <ig:ColumnSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding y2Lable1,Source={StaticResource data}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock Name="textLow"  Text="{Binding Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:ColumnSeries.ToolTip>
+                    </ig:ColumnSeries>
+                    <ig:ColumnSeries Name="colCorn" Title="Column Series" LegendItemTemplate="{x:Null}"
+                                 
+                                 ValueMemberPath="GrainTemp"
+                                     Brush="#8D8D8D"
+                                     Visibility="Hidden"
+                                 XAxis="{Binding ElementName=categoryXAxis}"
+                                 YAxis="{Binding ElementName=numericYAxis}">
+                        <ig:ColumnSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="{StaticResource ChartSeriesBrush2}" BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:ColumnSeries.MarkerTemplate>
+                        <ig:ColumnSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding y1Lable1,Source={StaticResource data}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock Name="textY"  Text="{Binding Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y, Converter={StaticResource StringFormatConverter}, ConverterParameter='0.0'}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:ColumnSeries.ToolTip>
+                    </ig:ColumnSeries>
+
+                    <ig:ColumnSeries Name="colGrain"  Title="Column Series" LegendItemTemplate="{x:Null}"
+                               
+                                 ValueMemberPath="GrainTemp"
+                                     Brush="#206B95"
+                                       Visibility="Hidden"
+                                 XAxis="{Binding ElementName=categoryXAxis}"
+                                 YAxis="{Binding ElementName=numericYAxis}">
+                        <ig:ColumnSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="{StaticResource ChartSeriesBrush2}" BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:ColumnSeries.MarkerTemplate>
+                        <ig:ColumnSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding yLable1,Source={StaticResource data}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock Name="textH"  Text="{Binding Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:ColumnSeries.ToolTip>
+                    </ig:ColumnSeries>
+
+                    <ig:ColumnSeries Name="colTCC" Title="Column Series" LegendItemTemplate="{x:Null}"
+                                    Brush="Red"                               
+                                 ValueMemberPath="GrainTemp"
+                                       Visibility="Hidden"
+                                 XAxis="{Binding ElementName=categoryXAxis}"
+                                 YAxis="{Binding ElementName=numericYAxis}">
+                        <ig:ColumnSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="{StaticResource ChartSeriesBrush2}" BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:ColumnSeries.MarkerTemplate>
+                        <ig:ColumnSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding y3Lable1,Source={StaticResource data}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock Name="textTC"  Text="{Binding  Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:ColumnSeries.ToolTip>
+                    </ig:ColumnSeries>
+                    
+
+                    <!--#BEGIN SNIPPET#-->
+                    <!-- ================================================================================================= -->
+                    <!-- Binding ValueOverlay to the Value property of MedianCalculator  -->
+                    <!-- ================================================================================================= -->
+                    <ig:LineSeries x:Name="MeanValueOverlay" Title="{Binding XWDC_ValueOverlays_MeanValueOverlay, Source={StaticResource Strings}}"
+                                 YAxis="{Binding ElementName=numericYAxis}"
+                                  XAxis="{Binding ElementName=categoryXAxis}"                                
+                                 Thickness="10" Opacity="0">
+                        <ig:LineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="平均值"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:LineSeries.MarkerTemplate>
+                        <ig:LineSeries.ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="平均值"/>
+                                    <TextBlock Text=":"/>
+                                    <TextBlock x:Name="textcenter" Text="{Binding Item.Media}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ig:LineSeries.ToolTip>
+
+                    </ig:LineSeries>
+                    <ig:LineSeries x:Name="LowestValueOverlay" Title="{Binding XWDC_ValueOverlays_LowestValueOverlay, Source={StaticResource Strings}}"
+                                  YAxis="{Binding ElementName=numericYAxis}"
+                                   XAxis="{Binding ElementName=categoryXAxis}"
+                               
+                                 Thickness="10" Opacity="0" MarkerType="Circle" >
+                        <ig:LineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="最小值"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:LineSeries.MarkerTemplate>
+
+                        <ig:LineSeries.ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="最低值"/>
+                                    <TextBlock Text=":"/>
+                                    <TextBlock x:Name="textlow" Text="{Binding Item.Low}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ig:LineSeries.ToolTip>
+
+                    </ig:LineSeries>
+                    <ig:LineSeries x:Name="HighestValueOverlay" Title="{Binding XWDC_ValueOverlays_HighestValueOverlay, Source={StaticResource Strings}}"
+                                 YAxis="{Binding ElementName=numericYAxis}"
+                                 XAxis="{Binding ElementName=categoryXAxis}"
+                                 Thickness="10" Opacity="0">
+                        <ig:LineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="最高值"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:LineSeries.MarkerTemplate>
+                        <ig:LineSeries.ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="最高值"/>
+                                    <TextBlock Text=":"/>
+                                    <TextBlock x:Name="textHigh" Text="{Binding Item.High}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ig:LineSeries.ToolTip>
+                    </ig:LineSeries>                
+                    <ig:ValueOverlay x:Name="VarianceValueOverlay" Title="{Binding XWDC_ValueOverlays_VarianceValueOverlay, Source={StaticResource Strings}}"
+                                 Axis="{Binding ElementName=numericYAxis}"
+                                 Value="{Binding Value, Source={StaticResource VarianceCalculator}}"
+                                 Thickness="10" Opacity="0"   >
+                        <ig:ValueOverlay.LegendItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <CheckBox Click="OnVarianceValueOverlayCheckBoxClick" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <ContentPresenter Content="{Binding}" Margin="5,0,0,0" ContentTemplate="{Binding Series.LegendItemBadgeTemplate}" />
+                                    <ContentPresenter Content="{Binding Series.Title, TargetNullValue=Series Title}" Margin="5,5,0,5" />
+                                    <TextBlock VerticalAlignment="Center" Text=": "></TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Width="25" Text="{Binding Value, ElementName=VarianceValueOverlay, Converter={StaticResource StringFormatConverter}, ConverterParameter='0.0'}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:ValueOverlay.LegendItemTemplate>
+                    </ig:ValueOverlay>
+                  
+                  <ig:ValueOverlay x:Name="FixedValueOverlay" Title="{Binding XWDC_ValueOverlays_FixedValueOverlay, Source={StaticResource Strings}}"
+                                 Axis="{Binding ElementName=numericYAxis}"
+                                 Value="7.0"
+                                 Thickness="10" Opacity="0"  >
+                        <ig:ValueOverlay.LegendItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <CheckBox Click="OnFixedValueOverlayCheckBoxClick" IsChecked="True" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <ContentPresenter Content="{Binding}" Margin="5,0,0,0" ContentTemplate="{Binding Series.LegendItemBadgeTemplate}" />
+                                    <ContentPresenter Content="{Binding Series.Title, TargetNullValue=Series Title}" Margin="5,5,0,5" />
+                                    <TextBlock VerticalAlignment="Center" Text=": "></TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Width="25" Text="{Binding Value, ElementName=FixedValueOverlay, Converter={StaticResource StringFormatConverter}, ConverterParameter='0.0'}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:ValueOverlay.LegendItemTemplate>
+                    </ig:ValueOverlay>
+                   <ig:ValueOverlay x:Name="EditableValueOverlay" Title="{Binding XWDC_ValueOverlays_EditableValueOverlay, Source={StaticResource Strings}}"
+                                 Axis="{Binding ElementName=numericYAxis}"
+                                 Value="{Binding Value, ElementName=EditableValueSlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='0.0'}"
+                                 Thickness="10" Opacity="0"  >
+                        <ig:ValueOverlay.LegendItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <CheckBox Click="OnEditableValueOverlayCheckBoxClick" IsChecked="True"
+                                          VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <ContentPresenter Content="{Binding}" Margin="5,0,0,0"
+                                                  ContentTemplate="{Binding Series.LegendItemBadgeTemplate}" />
+                                    <ContentPresenter Content="{Binding Series.Title, TargetNullValue=Series Title}"
+                                                  Margin="5,5,0,5" />
+                                    <TextBlock VerticalAlignment="Center" Text=": "></TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Width="25"
+                                           Text="{Binding Value, ElementName=EditableValueSlider, Converter={StaticResource StringFormatConverter}, ConverterParameter='0.0'}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:ValueOverlay.LegendItemTemplate>
+                    </ig:ValueOverlay>
+     
+                </ig:XamDataChart.Series>
+            </ig:XamDataChart>
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Label Content="时间"  HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Margin="368,-8,347,1" Width="54"  />
+            </Grid>
+
+            <Grid   Grid.Column="0" Grid.Row="0" >
+                <Label Content="粮&#xD;&#xA;温" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" Margin="1,140,-15,131" Width="28" Height="50"/>
+            </Grid>
+            <!--<Button Content="米象" x:Name="butRice" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="Button_Click" Grid.Column="1" Grid.Row="3" Height="40" Width="66" Margin="33,10,29,10"/>
+        <Button Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="66" Height="40" Click="Button_Click" Grid.Row="4" Grid.Column="0" Margin="32,5,25,6"/>
+        <Button Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="66" Height="40" Click="Button_Click" Grid.Row="4" Grid.Column="1" Margin="33,5,29,6"/>
+        <Button Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center"   Click="Button_Click" Grid.Row="3" Grid.Column="0" Height="40" Width="66" Margin="32,10,25,10"  />
+            
+        <Label x:Name="labTitle" FontSize="18" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="32" Margin="116,10,0,0" VerticalAlignment="Top" Width="335" Grid.Column="4"/>
+
+        <Rectangle Grid.Column="2" Grid.RowSpan="8" Fill="Yellow" StrokeThickness="0"></Rectangle>
+
+
+        <Label Content="时间" HorizontalAlignment="Center" VerticalAlignment="Center" Width="34" Height="25" Grid.Column="4" Grid.Row="7"/>
+        <Label Content="粮&#xD;&#xA;温" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="22" Grid.Column="3" Grid.Row="3" Margin="5,5,4,15"/>
+
+        <Label Content="粮温:" HorizontalAlignment="Right" Height="37" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="48" Grid.Row="1" Grid.Column="0" Margin="0,7" FontSize="16"/>
+        <TextBox BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5"  HorizontalAlignment="Left" Height="27"  TextWrapping="Wrap" Text="21.5~35" VerticalAlignment="Center"  Width="80"  Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Gray" Margin="0,12"/>
+
+        <Label Content="虫类:" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Height="37" VerticalAlignment="Center" Width="48" Grid.Row="2" Margin="0,10"/>
+        <TextBox BorderBrush="Aqua" BorderThickness="1.5" IsReadOnly="True" x:Name="textName" Text="All" HorizontalAlignment="Left" Height="27" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Foreground="Gray" Margin="0,15"/>
+
+        <Label x:Name="label" Content="描述:" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" FontSize="16" Foreground="Red" Height="29" Width="46"/>
+        <TextBox BorderBrush="Gray" BorderThickness="3"  VerticalScrollBarVisibility="Visible" x:Name="textDisplay" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" IsReadOnly="True"  Grid.Row="6" Width="249" Height="141" Grid.ColumnSpan="2" TextWrapping="Wrap" Grid.RowSpan="2" Text="此处为描述区"/>-->
+        </Grid>
+
+        <Grid Grid.Row="3" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid  Grid.Column="0">
+                <RadioButton Content="米象" x:Name="butRice" FontSize="15" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" IsChecked="True"/>
+            </Grid>
+            <Grid Grid.Column="1" >
+                <RadioButton Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" FontSize="15"/>
+            </Grid>
+            <Grid Grid.Column="2">
+                <RadioButton Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click"  FontSize="15"/>
+            </Grid>
+            <Grid Grid.Column="3">
+                <RadioButton Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"  FontSize="15"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</igFramework:SampleContainer>
+

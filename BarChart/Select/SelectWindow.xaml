@@ -1,0 +1,12 @@
+﻿<Window x:Class="CornPeatsTeXingBarChart.Select.SelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SelectWindow" Height="219.231" Width="300">
+    <Grid Loaded="Grid_Loaded">
+        <TextBlock FontSize="18" Height="27" Margin="126,10,111,0" TextWrapping="Wrap" Text="选项" VerticalAlignment="Top" RenderTransformOrigin="0.333,0.51"/>
+        <Button Content="玉米象" x:Name="butGrain1" Height="24" Margin="26,59,188,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="谷蠹" x:Name="butCorn1" Height="24" Margin="187,59,26,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="米象" x:Name="butRice1" HorizontalAlignment="Left" Height="24" Margin="26,131,0,0" VerticalAlignment="Top" Width="78" RenderTransformOrigin="-0.955,0.647" Click="Button_Click"/>
+        <Button Content="赤拟谷盗" x:Name="butTcc1" Height="24" Margin="187,131,26,0" VerticalAlignment="Top" RenderTransformOrigin="-0.955,0.647" Click="Button_Click"/>
+    </Grid>
+</Window>

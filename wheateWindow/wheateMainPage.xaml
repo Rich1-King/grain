@@ -1,0 +1,69 @@
+﻿<Page x:Class="wheateWindow.wheateMainPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="562" d:DesignWidth="1000">
+    <Page.Resources>
+        <Style x:Key="buttonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="10" BorderThickness="2" BorderBrush="Yellow">                       
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Chartreuse"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="213"/>
+            <ColumnDefinition Width="787*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" BorderBrush="AliceBlue"  BorderThickness="2">
+            <Grid >
+           
+                 <Grid>
+                   <Grid.RowDefinitions>
+                       <RowDefinition Height="19"/>
+                        <RowDefinition Height="57"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="57"/>
+                        <RowDefinition Height="36"/>
+                        <RowDefinition Height="57"/>
+                        <RowDefinition Height="48"/>
+                        <RowDefinition Height="249*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="but1" Grid.Row="1" Content="小麦害虫种群变化关系模型" Click="Button_Click" Background="Chartreuse" Style="{StaticResource buttonStyle}" FontSize="13">
+                       
+                </Button>
+                    <Button x:Name="but2" Grid.Row="3" Content="小麦特性参数变化关系模型" Click="Button_Click" Background="Chartreuse"  Style="{StaticResource buttonStyle}" FontSize="13">
+                     
+                    </Button>
+                    <Button x:Name="but3" Grid.Row="5" Content="害虫对虫蚀率与容重影响关系模型" Click="Button_Click" Background="Chartreuse"  Style="{StaticResource buttonStyle}" FontSize="13">
+                     
+                    </Button>
+                <Grid Grid.Row="7" Background="white">
+                        <Border BorderThickness="2" BorderBrush="Bisque">
+                            <TextBox x:Name="jieshi" FontSize="15" TextBlock.LineHeight="23" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" IsReadOnly="True"></TextBox>
+                        </Border>
+                    </Grid>
+            </Grid>
+      
+        </Grid>
+        </Border>
+        <Border Grid.Column="1" BorderBrush="Bisque" BorderThickness="2">
+            <Grid x:Name="mainGridWheate" Loaded="Grid_Load">
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

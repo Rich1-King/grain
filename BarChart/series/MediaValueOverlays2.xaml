@@ -1,0 +1,204 @@
+﻿<igFramework:SampleContainer x:Class="CornPeatsTeXingBarChart.series.MediaValueOverlays2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="500" d:DesignWidth="700"
+      Title="ValueOverlays Page"
+      xmlns:common="clr-namespace:CornPeatsTeXingBarChart.Calculators"
+      xmlns:controls="clr-namespace:CornPeatsTeXingBarChart"
+      xmlns:ig="http://schemas.infragistics.com/xaml"
+      xmlns:igFramework="clr-namespace:Infragistics.Samples.Framework;assembly=Infragistics.Samples.Framework"
+      xmlns:local="clr-namespace:CornPeatsTeXingBarChart.series"
+      xmlns:resources="clr-namespace:CornPeatsTeXingBarChart.Resources"
+      xmlns:other="clr-namespace:CornPeatsTeXingDataMember;assembly=CornPeatsTeXingDataMember" Loaded="SampleContainer_Loaded">
+
+    <igFramework:SampleContainer.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CornPeatsTeXingBarChart;component/IG.xamDataChart.xaml" />
+                <!-- this loads IG styles for MS controls -->
+                <ResourceDictionary Source="/CornPeatsTeXingBarChart;component/Assets/Global.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ig:StringFormatConverter x:Key="StringFormatConverter" />
+            <resources:DataChartStrings x:Key="Strings" />
+            <other:DataSource x:Key="data"/>
+        </ResourceDictionary>
+    </igFramework:SampleContainer.Resources>
+    <Grid>
+
+
+        <Grid x:Name="LayoutRoot" Background="White">
+
+
+            <ig:XamDataChart x:Name="DataChart"  HorizontalZoombarVisibility="Visible" VerticalZoombarVisibility="Visible" VerticalZoomable="True" HorizontalZoomable="True" Visibility="Visible" Legend="{Binding ElementName=Legend}" Margin="130,0,2,0" Loaded="DataChart_Loaded" Grid.RowSpan="2">
+                <!--#BEGIN SNIPPET#-->
+                <!-- ========================================================================== -->
+                <ig:XamDataChart.Resources>
+
+                    <!-- Calculators provided by Infragistics Math assembly -->
+                    <ig:MeanCalculator x:Key="MeanCalculator" x:Name="meanCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <ig:MedianCalculator x:Key="MedianCalculator" x:Name="medianCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <ig:VarianceCalculator x:Key="VarianceCalculator" x:Name="varianceCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <!-- Custom Calculators that calculate lowest and highest values in ItemsSource (Y data column) -->
+                    <common:LowestCalculator x:Key="LowestCalculator" x:Name="lowestCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                    <common:HighestCalculator x:Key="HighestCalculator" x:Name="hiahestCalculator" ValueMemberPath="Y" ItemsSource="{StaticResource data}" />
+                </ig:XamDataChart.Resources>
+                <!-- ========================================================================== -->
+                <!--#END SNIPPET#-->
+                <ig:XamDataChart.Axes>
+                    <ig:CategoryXAxis x:Name="categoryXAxis" Interval="1" Label="{}{date:MM/dd}" Tag="时间">
+                        <ig:CategoryXAxis.LabelSettings>
+                            <ig:AxisLabelSettings Location="OutsideBottom" Angle="1" Extent="40" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </ig:CategoryXAxis.LabelSettings>
+                    </ig:CategoryXAxis>
+                    <ig:NumericYAxis x:Name="numericYAxis" MinimumValue="710" MaximumValue="770"  Interval="3"/>
+                </ig:XamDataChart.Axes>
+                <ig:XamDataChart.Series >
+                    <ig:ColumnSeries Name="col" Title="Column Series" LegendItemTemplate="{x:Null}"
+                                 BorderThickness="3"
+                                 ValueMemberPath="Y"
+                                 Brush="Yellow"
+                                 Visibility="Visible"
+                                 XAxis="{Binding ElementName=categoryXAxis}"
+                                 YAxis="{Binding ElementName=numericYAxis}">
+                        <!--<ig:ColumnSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="{StaticResource ChartSeriesBrush2}" BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.Y}"
+                                               Foreground="White"
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:ColumnSeries.MarkerTemplate>-->
+                        <!--<ig:ColumnSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding yLable}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="水分:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="不完善度:"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="{Binding Item.Water}"></TextBlock>
+                                            <TextBlock Name="textLow"  Text="{Binding Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:ColumnSeries.ToolTip>-->
+                    </ig:ColumnSeries>
+                    <!--#BEGIN SNIPPET#-->
+                    <!-- ================================================================================================= -->
+                    <!-- Binding ValueOverlay to the Value property of MedianCalculator  -->
+                    <!-- ================================================================================================= -->
+
+                    <ig:LineSeries x:Name="MeanValueOverlay" Title="{Binding XWDC_ValueOverlays_MeanValueOverlay, Source={StaticResource Strings}}"
+                                 YAxis="{Binding ElementName=numericYAxis}"
+                                  XAxis="{Binding ElementName=categoryXAxis}"
+                                ValueMemberPath="Media"
+                                 Thickness="3" Opacity="1">
+                        <!--<ig:LineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="平均值"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:LineSeries.MarkerTemplate>-->
+                        <ig:LineSeries.ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="平均值"/>
+                                    <TextBlock Text=":"/>
+                                    <TextBlock x:Name="textcenter" Text="{Binding Item.Media}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ig:LineSeries.ToolTip>
+                    </ig:LineSeries>
+
+                    <ig:LineSeries x:Name="LowestValueOverlay" Title="{Binding XWDC_ValueOverlays_LowestValueOverlay, Source={StaticResource Strings}}"
+                                  YAxis="{Binding ElementName=numericYAxis}"
+                                  XAxis="{Binding ElementName=categoryXAxis}"
+                                 ValueMemberPath="Low"
+                                 Thickness="3" Opacity="1" MarkerType="Circle" >
+                        <!--<ig:LineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="最小值"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:LineSeries.MarkerTemplate>-->
+
+                        <ig:LineSeries.ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="最低值"/>
+                                    <TextBlock Text=":"/>
+                                    <TextBlock x:Name="textlow" Text="{Binding Item.Low}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ig:LineSeries.ToolTip>
+                    </ig:LineSeries>
+
+                    <ig:LineSeries x:Name="HighestValueOverlay" Title="{Binding XWDC_ValueOverlays_HighestValueOverlay, Source={StaticResource Strings}}"
+                                 YAxis="{Binding ElementName=numericYAxis}"
+                                 XAxis="{Binding ElementName=categoryXAxis}"
+                                 Thickness="3" Opacity="1" ValueMemberPath="High">
+                        <!--<ig:LineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <StackPanel>
+                                        <TextBlock Text="最高值"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ig:LineSeries.MarkerTemplate>-->
+                        <ig:LineSeries.ToolTip>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="最高值"/>
+                                    <TextBlock Text=":"/>
+                                    <TextBlock x:Name="textHigh" Text="{Binding Item.High}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </ig:LineSeries.ToolTip>
+                    </ig:LineSeries>
+                </ig:XamDataChart.Series>
+            </ig:XamDataChart>
+
+
+            <TextBlock HorizontalAlignment="Left" Margin="10,276,0,0" TextWrapping="Wrap" Text="类型:" VerticalAlignment="Top" Height="18" RenderTransformOrigin="0.683,0.523"/>
+            <TextBlock HorizontalAlignment="Left" Margin="37,276,0,0" TextWrapping="Wrap" x:Name="textName" VerticalAlignment="Top" Height="18" Width="85"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,321,0,0" TextWrapping="Wrap" Text="描述:" VerticalAlignment="Top" Height="18" RenderTransformOrigin="1.05,0.658"/>
+            <TextBlock Text="{Binding Display, Source={StaticResource Strings}}" HorizontalAlignment="Left" Margin="0,344,0,0" TextWrapping="Wrap" x:Name="textDisplay" VerticalAlignment="Top" Height="146" Width="117"/>
+            <Button x:Name="but0" Content="0" HorizontalAlignment="Left" Margin="0,214,0,0" VerticalAlignment="Top" Width="49" Click="Button_Click"/>
+            <Button x:Name="but2" Content="2" HorizontalAlignment="Left" Margin="54,214,0,0" VerticalAlignment="Top" Width="52" Click="Button_Click"/>
+            <Button x:Name="but5" Content="5" HorizontalAlignment="Left" Margin="0,238,0,0" VerticalAlignment="Top" Width="49" Click="Button_Click"/>
+            <Button x:Name="but10" Content="10" HorizontalAlignment="Left" Margin="54,238,0,0" VerticalAlignment="Top" Width="52" Click="Button_Click"/>
+            <Label FontSize="20" x:Name="labTitle" HorizontalAlignment="Left" Height="44" Margin="251,10,0,0" VerticalAlignment="Top" Width="414"/>
+            <Label Content="起始个数:" HorizontalAlignment="Left" Margin="0,184,0,0" VerticalAlignment="Top"/>
+            <CheckBox x:Name="checkTemp1" Content="20" HorizontalAlignment="Left" Margin="30,144,0,0" VerticalAlignment="Top"  Checked="check_Checked" Unchecked="check_Unchecked" IsChecked="False"/>
+            <CheckBox x:Name="checkTemp2" Content="25" HorizontalAlignment="Left" Margin="30,164,0,0" VerticalAlignment="Top"  Checked="check_Checked" Unchecked="check_Unchecked" IsChecked="False"/>
+
+            <Label Content="温度:" HorizontalAlignment="Left" Margin="0,114,0,0" VerticalAlignment="Top"/>
+
+
+
+            <Label x:Name="temp"  HorizontalAlignment="Left" Height="24" Margin="42,115,0,0" VerticalAlignment="Top" Width="103"/>
+            <Label x:Name="num"  HorizontalAlignment="Left" Height="24" Margin="61,185,0,0" VerticalAlignment="Top" Width="56"/>
+        </Grid>
+        <Label Content="日期" HorizontalAlignment="Left" Height="33" Margin="428,515,0,-48" VerticalAlignment="Top" Width="54"/>
+        <Label Content="虫&#xD;&#xA;数" HorizontalAlignment="Left" Height="85" Margin="123,182,0,0" VerticalAlignment="Top" Width="23" RenderTransformOrigin="0.426,0.595"/>
+        <Line X1="120" Y1="0" X2="120" Y2="680" Stroke="Yellow"/>
+    </Grid>
+</igFramework:SampleContainer>

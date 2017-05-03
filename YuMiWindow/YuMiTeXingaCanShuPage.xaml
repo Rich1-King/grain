@@ -1,0 +1,103 @@
+﻿<Page x:Class="YuMiWindow.YuMiTeXingaCanShuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="562" d:DesignWidth="787"
+	Title="YuMiTeXingaCanShuPage">
+    <Grid Loaded="Grid_Load">
+        <Border BorderThickness="2" BorderBrush="WhiteSmoke">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="19"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="546*"/>
+                    </Grid.ColumnDefinitions>
+                    <Menu  Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+
+                        <MenuItem x:Name="DataFenXi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Header="数据分析" Height="19" Width="72" Click="DataFenXi_Click">
+                            <MenuItem x:Name="ZuiZhi" Header="最值" >
+                                <!--<MenuItem x:Name="waterToRongZhong" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem x:Name="ZZSL" Header="参数变化速率">
+                                <!--<MenuItem x:Name="waterToRongZhong1" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao1" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong1" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao1" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong1" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao1" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem x:Name="NHQX" Header="拟合曲线">
+                                <!--<MenuItem x:Name="waterToRongZhong2" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao2" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong2" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao2" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong2" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao2" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                        </MenuItem>  
+                    </Menu>
+                    <Menu  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <MenuItem x:Name="DataDisplay" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Header="数据展示" Width="72" Height="19" Click="DataDisplay_Click">
+                            <MenuItem x:Name="QXT" Header="曲线图" >
+                                <!--<MenuItem x:Name="waterToRongZhong3" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao3" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong3" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao3" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong3" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao3" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem x:Name="TXT" Header="条形图">
+                                <!--<MenuItem x:Name="waterToRongZhong4" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao4" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong4" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao4" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong4" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao4" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem x:Name="ZXT" Header="折线图">
+                                <!--<MenuItem x:Name="waterToRongZhong5" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao5" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong5" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao5" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong5" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao5" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem x:Name="DTT" Header="动态图">
+                                <!--<MenuItem x:Name="waterToRongZhong6" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao6" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong6" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao6" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong6" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao6" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem x:Name="QPT" Header="气泡图">
+                                <!--<MenuItem x:Name="waterToRongZhong7" Header="水分与容重的关系"></MenuItem>
+                                <MenuItem x:Name="waterToJingZhiJiao7" Header="水分与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToRongZhong7" Header="破碎率与容重的关系"></MenuItem>
+                                <MenuItem x:Name="poSuiLvToJingZhiJiao7" Header="破碎率与静止角的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanLiangToRongZhong7" Header="杂质含量与容重的关系"></MenuItem>
+                                <MenuItem x:Name="zaZhiHanliangToJingZhiJiao7" Header="杂质含量与静止角的关系"></MenuItem>-->
+                            </MenuItem>
+                        </MenuItem>
+                    
+                       
+                    </Menu> 
+                </Grid>
+                <Grid Grid.Row="1" x:Name="main"></Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

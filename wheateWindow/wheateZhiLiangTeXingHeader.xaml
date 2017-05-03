@@ -1,0 +1,113 @@
+﻿<Page x:Class="wheateWindow.wheateZhiLiangTeXingHeader"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="562" d:DesignWidth="787"
+	Title="wheateZhiLiangTeXingHeader">
+
+    <Grid Loaded="Grid_Load">
+        <Border BorderThickness="2" BorderBrush="WhiteSmoke">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="19"/>
+                    <RowDefinition Height="441*"/>
+                    <RowDefinition Height="98"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70*"/>
+                        <ColumnDefinition Width="70*"/>
+                        <ColumnDefinition Width="70*"/>
+                        <ColumnDefinition Width="546*"/>
+                    </Grid.ColumnDefinitions>
+                    <Menu x:Name="DataFenXi" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <MenuItem Header="数据分析"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  Height="19" Width="72">
+                            <MenuItem x:Name="ZuiZhi" Header="最值" >
+                                <MenuItem x:Name="BuWanShanDu" Header="时间与不完善度关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi" Header="时间与脂肪酸值关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv" Header="时间与面筋吸水率关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="ZZSL" Header="参数增长速率">
+                                <MenuItem x:Name="BuWanShanDu1" Header="时间与不完善度关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi1" Header="时间与脂肪酸值关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv1" Header="时间与面筋吸水率关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                           
+                        </MenuItem>
+                            <MenuItem x:Name="NHQX" Header="拟合曲线">
+                                <MenuItem x:Name="BuWanShanDu2" Header="时间与不完善度关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi2" Header="时间与脂肪酸值关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv2" Header="时间与面筋吸水率关系" Click="MenuItemDataFenxi_Click"></MenuItem>
+                            </MenuItem>
+                        
+                        </MenuItem>
+                    </Menu>
+                    <Menu x:Name="DataDisplay" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <MenuItem Header="数据展现"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="19" Width="72">
+                            <MenuItem x:Name="QXT" Header="曲线图" >
+                                <MenuItem x:Name="BuWanShanDu3" Header="时间与不完善度关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi3" Header="时间与脂肪酸值关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv3" Header="时间与面筋吸水率关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="TXT" Header="条形图">
+                                <MenuItem x:Name="BuWanShanDu4" Header="时间与不完善度关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi4" Header="时间与脂肪酸值关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv4" Header="时间与面筋吸水率关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="ZXT" Header="折线图">
+                                <MenuItem x:Name="BuWanShanDu5" Header="时间与不完善度关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi5" Header="时间与脂肪酸值关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv5" Header="时间与面筋吸水率关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="DTT" Header="动态图">
+                                <MenuItem x:Name="BuWanShanDu6" Header="时间与不完善度关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi6" Header="时间与脂肪酸值关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv6" Header="时间与面筋吸水率关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="QPT" Header="气泡图">
+                                <MenuItem x:Name="BuWanShanDu7" Header="时间与不完善度关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi7" Header="时间与脂肪酸值关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv7" Header="时间与面筋吸水率关系" Click="MenuItemDataDisplay_Click"></MenuItem>
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+                    <Menu x:Name="DataYuCe" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+                        <MenuItem Header="数据预测" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="19" Width="73">
+                            <MenuItem x:Name="Day" Header="按照时间预测" >
+                                <MenuItem.ToolTip>
+                                    <Label Content="根据已有数据预测以后多少天内的数据"></Label>
+                                </MenuItem.ToolTip>
+                                <MenuItem x:Name="BuWanShanDu8" Header="时间与不完善度关系"  Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi8" Header="时间与脂肪酸值关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv8" Header="时间与面筋吸水率关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+
+                            </MenuItem>
+                            <MenuItem x:Name="Date" Header="按照日期预测">
+                                <MenuItem x:Name="BuWanShanDu9" Header="时间与不完善度关系"  Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi9" Header="时间与脂肪酸值关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv9" Header="时间与面筋吸水率关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="ZXEC" Header="按照最小二乘法预测">
+                                <MenuItem x:Name="BuWanShanDu10" Header="时间与不完善度关系"  Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi10" Header="时间与脂肪酸值关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv10" Header="时间与面筋吸水率关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+                            </MenuItem>
+                            <MenuItem x:Name="LGLR" Header="按照拉格朗日法预测">
+                                <MenuItem x:Name="BuWanShanDu11" Header="时间与不完善度关系"  Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="ZhiFangSuanZhi11" Header="时间与脂肪酸值关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+                                <MenuItem x:Name="MianJinXiShuiLv11" Header="时间与面筋吸水率关系" Click="MenuItemDataYuCe_Click"></MenuItem>
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+                </Grid>
+                <Grid x:Name="mainGrid" Grid.Row="1"/>
+                <Grid Grid.Row="2">
+                    <Border BorderBrush="CornflowerBlue"  BorderThickness="2">
+                        <RichTextBox x:Name="jieshi" TextBlock.LineHeight="23" FontStretch="ExtraCondensed" FontSize="15"  VerticalScrollBarVisibility="Visible" IsReadOnly="True" AcceptsReturn="True" FontFamily="Palatino Linotype"></RichTextBox>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

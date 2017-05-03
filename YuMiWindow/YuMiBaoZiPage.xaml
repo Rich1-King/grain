@@ -1,0 +1,81 @@
+﻿<Page x:Class="YuMiWindow.YuMiBaoZiPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+     d:DesignHeight="562" d:DesignWidth="787"
+	Title="YuMiBaoZiPage">
+
+    <Grid Loaded="Grid_Load">
+        <Border BorderThickness="2" BorderBrush="WhiteSmoke">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="19"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="WhiteSmoke">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="546*"/>
+                    </Grid.ColumnDefinitions>
+                    <Menu  Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+
+                        <MenuItem x:Name="DataFenXi" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Header="数据分析" Height="19" Width="72" Click="DataFenXi_Click">
+                            <MenuItem Header="最值" x:Name="ZuiZhi" >
+                                <!--<MenuItem x:Name="ZuiZhi" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem  Header="参数变化速率" x:Name="ZZSL">
+                                <!--<MenuItem x:Name="ZZSL" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem  Header="拟合曲线" x:Name="NHQX">
+                                <!--<MenuItem x:Name="NHQX" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                        </MenuItem>
+                    </Menu>
+                    <Menu  Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <MenuItem x:Name="DataDisplay" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Header="数据展示" Width="72" Height="19" Click="DataDisplay_Click">
+                            <MenuItem  Header="曲线图" x:Name="QXT">
+                                <!--<MenuItem x:Name="QXT" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem  Header="条形图" x:Name="TXT">
+                                <!--<MenuItem x:Name="TXT" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem  Header="折线图" x:Name="ZXT">
+                                <!--<MenuItem x:Name="ZXT" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem Header="动态图" x:Name="DTT">
+                                <!--<MenuItem x:Name="DTT"  Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem  Header="气泡图" x:Name="QPT">
+                                <!--<MenuItem x:Name="QPT"  Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                        </MenuItem>
+
+
+                    </Menu>
+                    <Menu  Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                        <MenuItem x:Name="DataYuCe" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Header="数据预测" Width="72" Height="19" Click="DataYuCe_Click">
+                            <MenuItem Header="按照时间预测" x:Name="day">
+                                <!--<MenuItem x:Name="day" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem Header="按照日期预测" x:Name="date" Visibility="Collapsed">
+                                <!--<MenuItem x:Name="date" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem Header="按照最小二乘法预测" x:Name="ZXEC">
+                                <!--<MenuItem x:Name="ZXEC" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                            <MenuItem Header="按照拉格朗日法预测" x:Name="LGLR">
+                                <!--<MenuItem x:Name="LGLR" Header="不同取样点孢子危害情况"></MenuItem>-->
+                            </MenuItem>
+                        </MenuItem>
+
+                    </Menu>
+                </Grid>
+                <Grid Grid.Row="1" x:Name="main"></Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

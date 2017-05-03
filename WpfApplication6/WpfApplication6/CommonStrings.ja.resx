@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Cancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="ChooseBuildinTheme" xml:space="preserve">
+    <value>定義済みテーマの選択:</value>
+  </data>
+  <data name="ChooseColorScheme" xml:space="preserve">
+    <value>配色の選択:</value>
+  </data>
+  <data name="ConfigurationPanel_Header_Options" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SelectAColor" xml:space="preserve">
+    <value>色の選択：</value>
+  </data>
+  <data name="ThemeSupport_ComboLabel" xml:space="preserve">
+    <value>テーマの選択:</value>
+  </data>
+  <data name="XW_BindingTime" xml:space="preserve">
+    <value>バインド タイム</value>
+  </data>
+  <data name="XW_Clear_Window_Button_Label" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+  <data name="XW_DataPoints" xml:space="preserve">
+    <value>データ ポイント</value>
+  </data>
+  <data name="XW_Date" xml:space="preserve">
+    <value>日付</value>
+  </data>
+  <data name="XW_HorizontalAlignment" xml:space="preserve">
+    <value>水平方向</value>
+  </data>
+  <data name="XW_Opacity" xml:space="preserve">
+    <value>不透明</value>
+  </data>
+  <data name="XW_Options" xml:space="preserve">
+    <value>オプション</value>
+  </data>
+  <data name="XW_PaneVisibility" xml:space="preserve">
+    <value>ペインの表示状態</value>
+  </data>
+  <data name="XW_Property_Brush" xml:space="preserve">
+    <value>ブラシ</value>
+  </data>
+  <data name="XW_Property_Thickness" xml:space="preserve">
+    <value>太さ</value>
+  </data>
+  <data name="XW_SampleStatus_Initialized" xml:space="preserve">
+    <value>初期化しました</value>
+  </data>
+  <data name="XW_SampleStatus_Initializing" xml:space="preserve">
+    <value>初期化しています</value>
+  </data>
+  <data name="XW_SampleStatus_Loaded" xml:space="preserve">
+    <value>読み込みました</value>
+  </data>
+  <data name="XW_SampleStatus_LoadedItems" xml:space="preserve">
+    <value>読み込んだ項目の数:</value>
+    <comment>Loaded items: [ # ]</comment>
+  </data>
+  <data name="XW_SampleStatus_Loading" xml:space="preserve">
+    <value>読み込んでいます...</value>
+  </data>
+  <data name="XW_SampleStatus_LoadingItem" xml:space="preserve">
+    <value>項目を読み込んでいます</value>
+    <comment>Loading item [ # ] ...  </comment>
+  </data>
+  <data name="XW_SampleTag_CTP" xml:space="preserve">
+    <value>(CTP)</value>
+  </data>
+  <data name="XW_SampleTag_NEW" xml:space="preserve">
+    <value>(NEW)</value>
+  </data>
+  <data name="XW_Settings" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="XW_Source_CIA" xml:space="preserve">
+    <value>出典: CIA ワールド ファクトブック (英語)</value>
+  </data>
+  <data name="XW_Source_GeoCommons" xml:space="preserve">
+    <value>出典: GeoCommons サービス (英語)</value>
+  </data>
+  <data name="XW_Source_GeoImagery" xml:space="preserve">
+    <value>出典: Microsoft BingMaps、OpenStreetMap、および CloudMadeMaps</value>
+  </data>
+  <data name="XW_Source_MapQuest" xml:space="preserve">
+    <value>出典: MapQuest、OpenStreetMap、NASA/JPL-Caltech、および U.S. DOA</value>
+  </data>
+  <data name="XW_Source_NOAA" xml:space="preserve">
+    <value>出典: NOAA 国立測候所 (英語)</value>
+  </data>
+  <data name="XW_Source_USCB" xml:space="preserve">
+    <value>出典: 米国勢調査局 (英語)</value>
+  </data>
+  <data name="XW_Source_USGS" xml:space="preserve">
+    <value>出典: 米国地質調査所 (英語)</value>
+  </data>
+  <data name="XW_Source_USNA" xml:space="preserve">
+    <value>出典: アメリカ合衆国国勢地図 (英語)</value>
+  </data>
+  <data name="XW_Source_USNA_CIA" xml:space="preserve">
+    <value>出典: アメリカ合衆国国勢地図 (英語) および CIA ワールド ファクトブック (英語)</value>
+  </data>
+  <data name="XW_ThemeSupport_ComboLabel" xml:space="preserve">
+    <value>テーマの選択:</value>
+  </data>
+  <data name="XW_ThemeSupport_DefaultTheme" xml:space="preserve">
+    <value>デフォルトのテーマ</value>
+  </data>
+  <data name="XW_ThemeSupport_IGTheme" xml:space="preserve">
+    <value>IG テーマ</value>
+  </data>
+  <data name="XW_ThemeSupport_Metro" xml:space="preserve">
+    <value>Metro テーマ</value>
+  </data>
+  <data name="XW_ThemeSupport_Office2010BlueTheme" xml:space="preserve">
+    <value>Office 2010 Blue テーマ</value>
+  </data>
+  <data name="XW_ThemeSupport_Themes" xml:space="preserve">
+    <value>テーマ</value>
+  </data>
+  <data name="XW_Time" xml:space="preserve">
+    <value>時間</value>
+  </data>
+  <data name="XW_TimeSpan" xml:space="preserve">
+    <value>タイム スパン</value>
+  </data>
+  <data name="XW_Value" xml:space="preserve">
+    <value>値</value>
+  </data>
+  <data name="XW_VerticalAlignment" xml:space="preserve">
+    <value>垂直方向</value>
+  </data>
+</root>

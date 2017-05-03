@@ -1,0 +1,256 @@
+﻿<Page x:Class="CornPeatsTeXingScatterDiagram.PredictWindows.CornPeatsTeXingPredict1"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="398" d:DesignWidth="783"
+      Title="ChartCrosshairCoordinates Page"
+      xmlns:controls="clr-namespace:CornPeatsTeXingScatterDiagram"
+      xmlns:ig="http://schemas.infragistics.com/xaml"
+      xmlns:igFramework="clr-namespace:Infragistics.Samples.Framework;assembly=Infragistics.Samples.Framework"
+      xmlns:local="clr-namespace:CornPeatsTeXingScatterDiagram"
+      xmlns:models="clr-namespace:CornPeatsTeXingScatterDiagram"
+      xmlns:functions="clr-namespace:Infragistics.Samples.Shared.Models;assembly=Infragistics.Samples.Shared"          
+      xmlns:model="clr-namespace:Infragistics.Samples.Shared.Models;assembly=Infragistics.Samples.Shared"
+      xmlns:resources="clr-namespace:CornPeatsTeXingScatterDiagram"
+      xmlns:other="clr-namespace:CornPeatsTeXingDataMember;assembly=CornPeatsTeXingDataMember"
+      xmlns:custom="clr-namespace:CornPeatsTeXingScatterDiagram.Behaviors"
+      xmlns:locals="clr-namespace:CornPeatsTeXingScatterDiagram.PredictWindows">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- load IG theme  -->
+                <ResourceDictionary Source="/CornPeatsTeXingScatterDiagram;component/IG/IG.xamDataChart.xaml" />
+                <!-- this loads IG styles for MS controls -->
+                <ResourceDictionary Source="/CornPeatsTeXingScatterDiagram;component/Assets/Global.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <other:DataSource x:Key="CategoryData" />
+            <other:DataSource x:Key="ScatterData" />
+            <resources:DataChartStrings x:Key="Strings" />
+            <ig:StringFormatConverter x:Key="StringFormatConverter" />
+            <model:NumericDataModel x:Key="LinearFunctionData">
+                <model:NumericDataModel.Function>
+                    <functions:LinearFunction DataPoints="5" ValueStart="20"/>
+                </model:NumericDataModel.Function>
+            </model:NumericDataModel>
+            <DropShadowEffect x:Key="MarkerEffect" ShadowDepth="1" BlurRadius="5" />
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White" Loaded="LayoutRoot_load">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="155*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Silver"  BorderThickness="2" Background="#FFF1F1F1">
+            <Grid>
+                <Label x:Name="labTitle" FontSize="20" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Silver" BorderThickness="1" Background="#FFF7F5F5">
+            <Grid Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="783*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="38*"/>
+                        <ColumnDefinition Width="81*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="时间:" VerticalAlignment="Center" Height="23" Width="37" FontSize="11"/>
+                    <Grid Grid.Column="1" x:Name="grid">
+                        <TextBox x:Name="CategoryXCoordinateTextBlock"     HorizontalAlignment="Stretch"  TextWrapping="Wrap" VerticalAlignment="Center"  BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding}" Height="{Binding}" FontSize="11"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="27*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center"  Content="头数:" FontSize="11" VerticalContentAlignment="Center"  Height="23" Width="37" />
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox x:Name="CategoryYCoordinateTextBlock" HorizontalAlignment="Stretch"  TextWrapping="Wrap" VerticalAlignment="Center" BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="{Binding}" Width="{Binding}" FontSize="11"/>
+                    </Grid>
+                </Grid>
+                <Grid Name="display" Grid.Column="2" Loaded="display_Load"/>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="129*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="341*"/>
+            </Grid.ColumnDefinitions>
+
+            <custom:ChartCrosshairBehaviors.CrosshairVisibility>
+                <custom:ChartCrosshairVisibilityBehavior ShowHorizontalCrosshair="False" ShowVerticalCrosshair="True"/>
+            </custom:ChartCrosshairBehaviors.CrosshairVisibility>
+
+            <ig:XamDataChart Grid.Column="1" Grid.Row="0" Name="CategoryChart" HorizontalZoomable="True" HorizontalZoombarVisibility="Visible" VerticalZoomable="True" VerticalZoombarVisibility="Visible"
+                         MouseMove="OnCategoryChartMouseMove"
+                         CrosshairVisibility="Visible">
+                <ig:XamDataChart.Axes>
+                    <ig:CategoryDateTimeXAxis  x:Name="categoryDateAxis"   DisplayType="Continuous" Interval="15"
+                                         DateTimeMemberPath="date"  Label="{}{date:MM/dd}">
+                        <ig:CategoryDateTimeXAxis.LabelSettings>
+                            <ig:AxisLabelSettings  Location="OutsideBottom" Angle="1" Extent="13" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </ig:CategoryDateTimeXAxis.LabelSettings>
+                    </ig:CategoryDateTimeXAxis>
+
+                    <ig:NumericXAxis x:Name="numericXAxis"
+                                     Visibility="Hidden"
+                                 MajorStroke="{StaticResource ForegroundBrush}"
+                                 MajorStrokeThickness="1"
+                                 Interval="1">
+                        <ig:NumericXAxis.LabelSettings>
+                            <ig:AxisLabelSettings Foreground="{StaticResource ForegroundBrush}"
+                                              FontSize="13"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"
+                                              Location="OutsideRight"
+                                           Visibility="Hidden" />
+                        </ig:NumericXAxis.LabelSettings>
+                    </ig:NumericXAxis>
+                    <ig:NumericYAxis x:Name="numericYAxis">
+                        <ig:NumericYAxis.LabelSettings >
+                            <ig:AxisLabelSettings Visibility="Visible" HorizontalAlignment="Center" ></ig:AxisLabelSettings>
+                        </ig:NumericYAxis.LabelSettings>
+                    </ig:NumericYAxis>
+                </ig:XamDataChart.Axes>
+                <ig:XamDataChart.Series>
+                    <ig:SplineSeries Name="col" Title="{Binding yLable}" 
+                               MarkerType="Circle" Thickness="3"
+                               XAxis="{Binding  ElementName=categoryDateAxis}" 
+                               YAxis="{Binding  ElementName=numericYAxis}"
+                                   Visibility="Hidden"
+                               ValueMemberPath="Y"
+                                   Brush="#8D8D8D"
+                                     Opacity="1">
+
+                        <ig:SplineSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding Item.yLable}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="起始个数:"></TextBlock>
+                                            <TextBlock Text="温度:"></TextBlock>
+                                            <TextBlock Text="{Binding Item.yLable}"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="{Binding Item.PeatsMiDu}"></TextBlock>
+                                            <TextBlock Name="textY"  Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock x:Name="textCornY1"></TextBlock>
+                                            <TextBlock x:Name="textCornDate"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:SplineSeries.ToolTip>
+
+                    </ig:SplineSeries>
+
+
+
+                    <ig:ValueOverlay x:Name="ClipLine" 
+                                 Axis="{Binding ElementName=numericXAxis}" 
+                                 Brush="Red"
+                                 Thickness="10" Opacity="0.5" >
+
+                        <ig:ValueOverlay.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="预测时间轴:"/>
+                                        <TextBlock x:Name="textChaZhi" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:ValueOverlay.ToolTip>
+                    </ig:ValueOverlay>
+
+                </ig:XamDataChart.Series>
+
+            </ig:XamDataChart>
+
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Label Content="时间(MM/dd)"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Stretch" Margin="0,-9,0,0"  />
+            </Grid>
+
+            <Grid   Grid.Column="0" Grid.Row="0" >
+                <Label x:Name="yLabel" HorizontalAlignment="Center"  VerticalAlignment="Stretch"  HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" Width="30" Margin="0,0,-10,0"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="79*" ></ColumnDefinition>
+                <ColumnDefinition Width="132*" ></ColumnDefinition>
+                <ColumnDefinition Width="86*" ></ColumnDefinition>
+                <ColumnDefinition Width="9*" ></ColumnDefinition>
+                <ColumnDefinition Width="112*"/>
+                <ColumnDefinition Width="122*" ></ColumnDefinition>
+                <ColumnDefinition Width="127*" ></ColumnDefinition>
+                <ColumnDefinition Width="116*" ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Loaded="DayOrDate_Load">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40*"/>
+                    <ColumnDefinition Width="49*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="天数:" HorizontalAlignment="Right"  VerticalAlignment="Center"
+                           HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Grid.Column="0"></Label>
+                <ig:XamComboEditor x:Name="daySelect"           
+                            Grid.Column="1" Loaded="JiaZaiData_Loaded" SelectedIndex="0" SelectionChanged="daySelect_Changed" Visibility="Visible" SelectedItem="0"  IsEditable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </Grid>
+            <Grid Grid.Column="1" Loaded="DayOrDate_Load">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="87*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="日期:" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="24" Margin="-2,2,0,2" Width="37"></Label>
+                <DatePicker x:Name="dateSelect" 
+            SelectedDateFormat="Short" FirstDayOfWeek="Monday"
+            DisplayDateStart="2015/5/1" DisplayDateEnd="2016/5/1"  SelectedDate="2015/5/31"
+            IsTodayHighlighted="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" SelectedDateChanged="dateSelect_Changed">
+                    <DatePicker.BlackoutDates>
+                        <CalendarDateRange Start="2015/5/1" End="2015/5/30"/>
+
+                    </DatePicker.BlackoutDates>
+                </DatePicker>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="13*"></ColumnDefinition>
+                    <ColumnDefinition Width="17*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="温度:" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Margin="3,2,49,2" Width="38" Grid.ColumnSpan="2"></Label>
+                <TextBox x:Name="tempText" Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontSize="13"></TextBox>
+                <ig:XamComboEditor x:Name="tempCom" Grid.Column="1" IsEditable="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="15" SelectionChanged="tempComm_Changed" Loaded="tempCom_load"  SelectedItem="20" SelectedIndex="0"/>
+            </Grid>
+            <Grid  Grid.Column="4"  >
+                <RadioButton x:Name="but1" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" IsChecked="True"/>
+            </Grid>
+            <Grid Grid.Column="5" >
+                <RadioButton x:Name="but2" HorizontalAlignment="Left"  VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" FontSize="15" IsChecked="False"/>
+            </Grid>
+            <Grid Grid.Column="6">
+                <RadioButton x:Name="but3" HorizontalAlignment="Left"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click"  FontSize="15" IsChecked="False"/>
+            </Grid>
+            <Grid Grid.Column="7">
+                <RadioButton x:Name="but4" HorizontalAlignment="Left"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"  FontSize="15" IsChecked="False"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

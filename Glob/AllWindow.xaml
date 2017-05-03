@@ -1,0 +1,412 @@
+﻿<igFramework:SampleContainer x:Class="Glob.AllWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        d:DesignHeight="398" d:DesignWidth="783"  Title="Core"
+        xmlns:controls="clr-namespace:Infragistics.Samples.Shared.Controls;assembly=Infragistics.Samples.Shared"
+        xmlns:ig="http://schemas.infragistics.com/xaml"
+        xmlns:igFramework="clr-namespace:Infragistics.Samples.Framework;assembly=Infragistics.Samples.Framework"
+        xmlns:models="clr-namespace:Infragistics.Samples.Shared.Models;assembly=Infragistics.Samples.Shared"
+        xmlns:resources="clr-namespace:Glob.Resources"
+        xmlns:data="clr-namespace:DataMember;assembly=DataMember"
+         xmlns:Local="clr-namespace:Glob">
+    <igFramework:SampleContainer.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Glob;component/IG.xamDataChart.xaml" />
+                <!-- this loads IG styles for MS controls -->
+                <ResourceDictionary Source="/Glob;component/Global.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <models:SampleBubbleDataCollection x:Key="bubbleData"  />
+            <data:DataSource x:Key="data1"/>
+            <resources:DataChartStrings x:Key="Strings" />
+            <DataTemplate x:Key="BubbleMarkerTemplate"  >
+                <Grid>
+                    <!--<Ellipse Stretch="Fill"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                            
+                             Stroke="{Binding Series.ActualMarkerOutline}" 
+                             StrokeThickness="0.5">
+                        <Ellipse.Fill>
+                            <
+                        </Ellipse.Fill>-->
+                    <Ellipse x:Name="ellipse1">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="#206B95"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+                    <Ellipse Margin="1,1,1,1" x:Name="ellipse2">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#206B95" Offset="1"/>
+                                <GradientStop Color="White"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="BubbleMarkerTemplate1"  >
+                <Grid Loaded="Grid_Loaded">
+                    <!--<Ellipse Stretch="Fill"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Fill="Gray"
+                             Stroke="{Binding Series.ActualMarkerOutline}" 
+                             StrokeThickness="0.5"/>-->
+                    <Ellipse x:Name="ellipse1">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="#8D8D8D"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+                    <Ellipse Margin="1,1,1,1" x:Name="ellipse2">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#8D8D8D" Offset="1"/>
+                                <GradientStop Color="White"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="BubbleMarkerTemplate3"  >
+                <Grid>
+                    <!--<Ellipse Stretch="Fill"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Fill="CadetBlue"
+                           
+                             Stroke="{Binding Series.ActualMarkerOutline}" 
+                             StrokeThickness="0.5"/>-->
+                    <Ellipse x:Name="ellipse1">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="Black"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+                    <Ellipse Margin="1,1,1,1" x:Name="ellipse2">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Black" Offset="1"/>
+                                <GradientStop Color="White"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                </Grid>
+            </DataTemplate>
+            <DataTemplate x:Key="BubbleMarkerTemplate4"  >
+                <Grid>
+                    <!--<Ellipse Stretch="Fill"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Fill="Plum"
+                             Stroke="{Binding Series.ActualMarkerOutline}" 
+                             StrokeThickness="0.5"/>-->
+                    <Ellipse x:Name="ellipse1">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="White" Offset="0"/>
+                                <GradientStop Color="Red"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+
+                    </Ellipse>
+                    <Ellipse Margin="1,1,1,1" x:Name="ellipse2">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="1"/>
+                                <GradientStop Color="White"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+            </DataTemplate>
+            <ig:StringFormatConverter x:Key="StringFormatConverter"/>
+        </ResourceDictionary>
+    </igFramework:SampleContainer.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="White" Loaded="LayoutRoot_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="155*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Silver" BorderThickness="2" Background="#FFF1F1F1">
+            <Grid >
+                <Label x:Name="labTitle" FontSize="20" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+
+                <!--<Grid  Grid.Column="1">
+                    <RadioButton Content="米象" x:Name="butRice" FontSize="15" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" IsChecked="True"/>
+                </Grid>
+                <Grid Grid.Column="2" >
+                    <RadioButton Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" FontSize="15"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <RadioButton Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click"  FontSize="15"/>
+                </Grid>
+                <Grid Grid.Column="4">
+                    <RadioButton Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"  FontSize="15"/>
+                </Grid>-->
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Silver" BorderThickness="2" Background="#FFF7F5F5">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="783*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Name="display" Grid.Column="2" Loaded="display_Load"/>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="129*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="1097*"/>
+            </Grid.ColumnDefinitions>
+            <ig:XamDataChart x:Name="dataChart"
+                         HorizontalAlignment="Stretch"
+                         HorizontalContentAlignment="Stretch"
+                         Grid.Column="4" Grid.Row="0"
+                             HorizontalZoombarVisibility="Visible" VerticalZoombarVisibility="Visible">
+                <!--#BEGIN SNIPPET#-->
+                <!-- ========================================================================== -->
+                <ig:XamDataChart.Axes>
+
+                    <ig:NumericXAxis x:Name="XAxis2"   MinimumValue="21" MaximumValue="36" Interval="1">
+                        <ig:NumericXAxis.LabelSettings>
+                            <ig:AxisLabelSettings Location="OutsideBottom" Angle="1" Extent="13" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </ig:NumericXAxis.LabelSettings>
+                    </ig:NumericXAxis>
+
+                    <ig:NumericYAxis  x:Name="YAxis2" MinimumValue="0" MaximumValue="15" Interval="1">
+                        <ig:NumericYAxis.LabelSettings>
+                            <ig:AxisLabelSettings Location="OutsideBottom" Visibility="Visible"></ig:AxisLabelSettings>
+                        </ig:NumericYAxis.LabelSettings>
+                    </ig:NumericYAxis>
+                </ig:XamDataChart.Axes>
+                <!-- ========================================================================== -->
+                <!--#END SNIPPET#-->
+
+                <ig:XamDataChart.Series>
+
+                    <ig:BubbleSeries  Title="BubbleSeries" Name="colGrain"
+                                  BorderThickness="2"
+                                  XAxis="{Binding ElementName=XAxis2}"
+                                  YAxis="{Binding ElementName=YAxis2}"
+                                  XMemberPath="ValueX"  YMemberPath="ValueY"
+                                  RadiusMemberPath="ValueR"                                          Visibility="Hidden"
+                                  MarkerType="Circle"
+                                  MarkerTemplate="{StaticResource BubbleMarkerTemplate}"
+                                
+                                  >
+                        <ig:BubbleSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Text="玉米象"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">  
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="日期:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                         
+                                            <TextBlock Text="{Binding Item.ValueOfTem}" ></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueX}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueY}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueDateTime}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:BubbleSeries.ToolTip>
+                    </ig:BubbleSeries>
+
+                    <ig:BubbleSeries  Title="BubbleSeries" Name="colCorn"
+                                  BorderThickness="2"
+                                  XAxis="{Binding ElementName=XAxis2}"
+                                  YAxis="{Binding ElementName=YAxis2}"
+                                  XMemberPath="ValueX"  YMemberPath="ValueY"
+                                  RadiusMemberPath="ValueR"                                  Visibility="Hidden"
+                                  MarkerType="Circle"
+                                 
+                                   MarkerTemplate="{StaticResource BubbleMarkerTemplate1}"
+                                  
+                                  LineJoin="Bevel">
+                        <ig:BubbleSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Text="谷蠹"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                        
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="日期:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                        
+                                            <TextBlock Text="{Binding Item.ValueOfTem}" ></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueX}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueY}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueDateTime}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:BubbleSeries.ToolTip>
+                    </ig:BubbleSeries>
+
+                    <ig:BubbleSeries  Title="BubbleSeries" Name="colRice" 
+                                  BorderThickness="2"
+                                  XAxis="{Binding ElementName=XAxis2}"
+                                  YAxis="{Binding ElementName=YAxis2}"
+                                  XMemberPath="ValueX"  YMemberPath="ValueY"
+                                  RadiusMemberPath="ValueR"                                  
+                                  MarkerType="Circle"
+                                 
+                                   MarkerTemplate="{StaticResource BubbleMarkerTemplate3}"
+                                
+                                  LineJoin="Bevel">
+                        <ig:BubbleSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Text="米象"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                           
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="日期:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            
+                                            <TextBlock Text="{Binding Item.ValueOfTem}" ></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueX}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueY}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueDateTime}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:BubbleSeries.ToolTip>
+                    </ig:BubbleSeries>
+                    <ig:BubbleSeries  Title="BubbleSeries" Name="colTCC"
+                                  BorderThickness="2"
+                                  XAxis="{Binding ElementName=XAxis2}"
+                                  YAxis="{Binding ElementName=YAxis2}"
+                                  XMemberPath="ValueX"  YMemberPath="ValueY"
+                                  RadiusMemberPath="ValueR"                                  
+                                  MarkerType="Circle"
+                                
+                                  Visibility="Hidden"
+                                   MarkerTemplate="{StaticResource BubbleMarkerTemplate4}"
+                                  
+                                  LineJoin="Bevel">
+                        <ig:BubbleSeries.ToolTip>
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Text="赤拟谷盗"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                          
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="日期:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            
+                                            <TextBlock Text="{Binding Item.ValueOfTem}" ></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueX}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueY}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.ValueDateTime}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:BubbleSeries.ToolTip>
+                    </ig:BubbleSeries>
+                </ig:XamDataChart.Series>
+            </ig:XamDataChart>
+
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Label Content="粮温(/℃)"  HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Margin="368,-8,332,1" Width="69"  />
+            </Grid>
+
+            <Grid   Grid.Column="0" Grid.Row="0" >
+                <Label Content="种&#xD;&#xA;群&#xD;&#xA;数&#xD;&#xA;量&#xD;&#xA;（&#xD;&#xA;头&#xD;&#xA;/&#xD;&#xA;kg&#xD;&#xA;)" HorizontalAlignment="Center"  VerticalAlignment="Stretch"  HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"    FontSize="11" Width="30" Margin="0,0,-10,0"/>
+            </Grid>
+            <!--<Label Content="粮温" HorizontalAlignment="Center" VerticalAlignment="Center" Width="34" Height="25" Grid.Column="4" Grid.Row="7"/>
+        <Label Content="虫&#xD;&#xA;数" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="22" Grid.Column="3" Grid.Row="3" Margin="5,5,4,15"/>
+
+        <Label Content="粮温:" HorizontalAlignment="Right" Height="37" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="48" Grid.Row="1" Grid.Column="0" Margin="0,7" FontSize="16"/>
+        <TextBox BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5"  HorizontalAlignment="Left" Height="27"  TextWrapping="Wrap" Text="21.5~35" VerticalAlignment="Center"  Width="80"  Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Gray" Margin="0,12"/>
+
+        <Label Content="虫类:" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Height="37" VerticalAlignment="Center" Width="48" Grid.Row="2" Margin="0,10"/>
+        <TextBox BorderBrush="Aqua" BorderThickness="1.5" IsReadOnly="True" x:Name="textName"  HorizontalAlignment="Left" Height="27" TextWrapping="Wrap" VerticalAlignment="Center" Width="80" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Foreground="Gray" Margin="0,15" Text="All" IsEnabled="False" IsReadOnlyCaretVisible="True"/>
+
+
+        <Label x:Name="label" Content="描述:" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="5" FontSize="16" Foreground="Red" Height="29" Width="46"/>
+        <TextBox BorderBrush="Gray" BorderThickness="3"  VerticalScrollBarVisibility="Visible" x:Name="textDisplay" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" IsReadOnly="True"  Grid.Row="6" Width="249" Height="141" Grid.ColumnSpan="2" TextWrapping="Wrap" Grid.RowSpan="2" Text="此处为描述区"/>
+
+
+        <Button Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center"   Click="Button_Click" Grid.Row="3" Grid.Column="0" Height="40" Width="66" Margin="32,10,25,10"  />
+
+        <Button Content="米象" x:Name="butRice" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="Button_Click" Grid.Column="1" Grid.Row="3" Height="40" Width="66" Margin="33,10,29,10"/>
+
+        <Button Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="66" Height="40" Click="Button_Click" Grid.Row="4" Grid.Column="0" Margin="32,5,25,6"/>
+
+        <Button Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="66" Height="40" Click="Button_Click" Grid.Row="4" Grid.Column="1" Margin="33,5,29,6"/>
+
+        <Label x:Name="labTitle" FontSize="18" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="32" Margin="116,10,0,0" VerticalAlignment="Top" Width="335" Grid.Column="4"/>
+
+        <Rectangle Grid.Column="2" Grid.RowSpan="8" Fill="Yellow" StrokeThickness="0"></Rectangle>-->
+        </Grid>
+        <Grid Grid.Row="3" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <RadioButton Content="米象" x:Name="butRice" FontSize="15" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" IsChecked="True"/>
+            </Grid>
+            <Grid Grid.Column="1" >
+                <RadioButton Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" FontSize="15"/>
+            </Grid>
+            <Grid Grid.Column="2">
+                <RadioButton Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click"  FontSize="15"/>
+            </Grid>
+            <Grid Grid.Column="3">
+                <RadioButton Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"  FontSize="15"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</igFramework:SampleContainer>

@@ -1,0 +1,219 @@
+﻿<Page x:Class="WindAnaylisisSysytem.AppBegin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"  
+      mc:Ignorable="d" 
+      
+       d:DesignHeight="609" d:DesignWidth="1000">
+    <Page.Resources>
+        <Style x:Key="EllipseButton" TargetType="Button">
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="Width" Value="100" />
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="Button">
+                        <Grid>
+                            <Ellipse Name="EllipseButtonBackground"  StrokeThickness="3">
+                                <Ellipse.Stroke>
+                                    <LinearGradientBrush StartPoint="0.0,0" EndPoint="0.0,1">
+                                        <GradientStop Offset="0" Color=" SlateGray" ></GradientStop>
+                                        <GradientStop Offset="1.0" Color="DarkKhaki" ></GradientStop>
+                                    </LinearGradientBrush>
+                                </Ellipse.Stroke>
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush StartPoint="0.0,0" EndPoint="0.0,1">
+                                        <GradientStop Offset="0" Color="#ccffff" ></GradientStop>
+                                        <GradientStop Offset="1.0" Color="Black" ></GradientStop>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+
+                            </Ellipse>
+                            <Ellipse Margin="15,5,15,50"  >
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1"  >
+                                        <GradientStop Offset="0" Color="#ffffff" ></GradientStop>
+                                        <GradientStop Offset="1" Color="Transparent"></GradientStop>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <ContentPresenter Name="EllipseButtonContent" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center"></ContentPresenter>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="EllipseButtonBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush RadiusX="0.5" RadiusY="0.5" Center="0.5,0.5">
+                                            <GradientStop Offset="0" Color="Orange"></GradientStop>
+                                            <GradientStop Offset="1" Color="Purple"></GradientStop>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Ellipse.Fill" TargetName="EllipseButtonBackground">
+                                    <Setter.Value>
+                                        <RadialGradientBrush RadiusX="0.5" RadiusY="0.5" Center="0.5,0.5">
+                                            <GradientStop Offset="0" Color="Orange"></GradientStop>
+                                            <GradientStop Offset="1" Color="Green"></GradientStop>
+                                        </RadialGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Border BorderThickness="3" BorderBrush="Black">
+            <Grid Loaded="mainDisplay_Load">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="47"/>
+                    <RowDefinition Height="563*"/>
+                </Grid.RowDefinitions>
+                <Border BorderBrush="#FFE5EBF1"  BorderThickness="2">
+                    <Grid Grid.Row="0" Background="#FFB4B0B0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="32*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="32*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="32*"/>
+                            <ColumnDefinition Width="856*"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="TitleName" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" Grid.Column="6" Height="40" Width="856" ></Label>
+                    </Grid>
+                </Border>
+                <Grid x:Name="mainGrid" Grid.Row="1">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="212"/>
+                            <ColumnDefinition Width="787*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" BorderBrush="AliceBlue" BorderThickness="2">
+                            <Grid Background="#FFF1F9F8">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="275*"/>
+                                    <RowDefinition Height="278*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Background="#FFE5EBF1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button x:Name="corn" Grid.Column="1" Content="玉米&#13;特性&#13;参数&#13;智能&#13;数字&#13;  化&#13;数据&#13;平台" MouseEnter="Button_MouseEnter" Click="Button_Click" FontSize="15" Foreground="Blue" Background="White" Height="210">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border BorderThickness="3" BorderBrush="Green"  CornerRadius="0,0,20,20">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="48*"/>
+                                                            <RowDefinition Height="143*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Background="White" Grid.Row="0">
+                                                            <Image Source="pack://siteoforigin:,,,/images/Corn.jpg" ></Image>
+                                                        </Grid>
+                                                        <Border Grid.Row="1" Background="{TemplateBinding Background}" CornerRadius="0,0,20,20" x:Name="borderText">
+                                                            <Grid>
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"  Content="{TemplateBinding Button.Content}">
+
+                                                                </ContentPresenter>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="Button.IsPressed" Value="true">
+                                                        <Setter TargetName="borderText" Property="Border.Background" Value="AntiqueWhite"></Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Button x:Name="rice" Grid.Column="2" Content="稻谷&#13;特性&#13;参数&#13;智能&#13;数字&#13;  化&#13;数据&#13;平台" MouseEnter="Button_MouseEnter" Click="Button_Click" FontSize="15" Foreground="Blue" Background="White" Height="210">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border BorderThickness="3" BorderBrush="Green"  CornerRadius="0,0,20,20">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="48*"/>
+                                                            <RowDefinition Height="143*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0" Background="{TemplateBinding Background}" >
+                                                            <Image Source="pack://siteoforigin:,,,/images/rice.jpg" ></Image>
+                                                        </Grid>
+                                                        <Border Grid.Row="1" Background="{TemplateBinding Background}" CornerRadius="0,0,20,20" x:Name="borderText">
+                                                            <Grid>
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}">
+
+                                                                </ContentPresenter>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="Button.IsPressed" Value="true">
+                                                        <Setter TargetName="borderText" Property="Border.Background" Value="AntiqueWhite"></Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <Button x:Name="wheate" Grid.Column="0" Content="小麦&#13;特性&#13;参数&#13;智能&#13;数字&#13;  化&#13;数据&#13;平台
+" MouseEnter="Button_MouseEnter" Click="Button_Click" FontSize="15" Foreground="Blue" Background="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="210">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border BorderThickness="3" BorderBrush="Green"  CornerRadius="0,0,20,20">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="48*"/>
+                                                            <RowDefinition Height="155*"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0" Background="White">
+                                                            <Image Source="pack://siteoforigin:,,,/images/wheate.jpg" ></Image>
+                                                        </Grid>
+                                                        <Border Grid.Row="1" Background="{TemplateBinding Background}" CornerRadius="0,0,20,20" x:Name="borderText">
+                                                            <Grid>
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Button.Content}">
+
+                                                                </ContentPresenter>
+                                                            </Grid>
+                                                        </Border>
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="Button.IsPressed" Value="true">
+                                                        <Setter TargetName="borderText" Property="Border.Background" Value="AntiqueWhite"></Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+
+                                <Grid Grid.Row="1" Background="white">
+                                    <Border BorderThickness="2" BorderBrush="Bisque">
+                                        <TextBox x:Name="jieshi" TextBlock.LineHeight="23" FontStretch="ExtraCondensed"  FontSize="15"  VerticalScrollBarVisibility="Visible" TextWrapping="Wrap" IsReadOnly="True"></TextBox>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <Grid x:Name="mainDisplay" Grid.Column="1">
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

@@ -1,0 +1,131 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:controls="clr-namespace:WindAnaylisisSysytem.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d">
+
+
+    <SolidColorBrush x:Key="ControlNamePrefixForeground" Color="#FF2CBDF9" />
+    <SolidColorBrush x:Key="ControlNameForeground" Color="#FF454545" />
+    <SolidColorBrush x:Key="ControlDescriptionForeground" Color="#FF595959" />
+
+    <Style TargetType="controls:LandingPage">
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="Foreground" Value="#FF535F64" />
+        <Setter Property="ControlDescription" Value="Control Description..." />
+        <Setter Property="ControlName" Value="Control Name" />
+        <Setter Property="ControlNamePrefix" Value="xam" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:LandingPage">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid Background="{TemplateBinding Background}" Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <!--<Image x:Name="controlLogo" Height="130" Width="130" Source="{TemplateBinding ControlImagePath}" Visibility="Visible" 
+                                   Stretch="Uniform" HorizontalAlignment="Center" Margin="20" VerticalAlignment="Top" Grid.Column="0" />-->
+                            <Grid Visibility="Visible" HorizontalAlignment="Center" Margin="20,10,20,0" VerticalAlignment="Top" 
+                                  Grid.Column="0" Grid.Row="0" Background="Transparent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <!--<Image x:Name="controlLogo" Grid.Row="0" Height="130" Width="130" Source="{TemplateBinding ControlImagePath}" Stretch="Uniform"     />-->
+                                 
+                                <Image x:Name="controlLogo2" Height="120" Width="120" Source="{TemplateBinding ControlImageSource}" Stretch="Uniform" />
+
+                            </Grid>
+
+                            <Grid HorizontalAlignment="Left" Margin="20,0,20,0" d:LayoutOverrides="HorizontalAlignment" 
+                                  Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
+                                <Grid Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock x:Name="controlNamePrefix" Text="{TemplateBinding ControlNamePrefix}" TextWrapping="Wrap" d:LayoutOverrides="Height" Foreground="{StaticResource ControlNamePrefixForeground}" FontSize="32" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="controlName" Text="{TemplateBinding ControlName}" TextWrapping="Wrap" d:LayoutOverrides="Height" Foreground="{StaticResource ControlNameForeground}" FontSize="32" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+
+                            <!-- ContentPresenter -->
+                            <Grid x:Name="controlDescription" VerticalAlignment="Stretch" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="20,0,20,20" 
+                                  Background="Transparent">
+                                <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+                                    <!--<TextBlock xml:space="preserve" FontSize="{TemplateBinding FontSize}" TextWrapping="Wrap" 
+                                               Foreground="{StaticResource ControlDescriptionForeground}" Margin="0,-20,0,0" 
+                                               d:LayoutOverrides="HorizontalAlignment" Width="Auto" Height="Auto">
+                                        <TextBlock Text="{TemplateBinding ControlDescription}" TextWrapping="Wrap" />
+                                    </TextBlock>-->
+                                    <ItemsPresenter Margin="5" />
+                                </ScrollViewer>
+                            </Grid>
+                           
+                            <!--<Rectangle Grid.ColumnSpan="2" Fill="{StaticResource OptionsPanelHeaderBackground}" />
+                            <Rectangle Grid.ColumnSpan="2" Height="1" VerticalAlignment="Bottom" Fill="#FFB1B1B1" />
+                            <Border Background="Transparent" x:Name="optPanel" Grid.ColumnSpan="2">
+                                <TextBlock x:Name="textBlock" Text="{TemplateBinding HeaderText}" FontSize="12" TextWrapping="Wrap" Margin="5,3,26,5" />
+                            </Border>
+                           
+                            <ToggleButton Grid.Column="1" x:Name="btnState" IsChecked="True" Height="16" FontSize="10" FontWeight="ExtraBold" IsThreeState="False" VerticalAlignment="Center" Margin="5,1,4,2" Style="{StaticResource OptionsPanelToggleButtonStyle}" Foreground="White" Padding="2,3,3,3" />
+                            
+                            
+                            <ScrollViewer x:Name="scrollContent" Style="{StaticResource ScrollViewerStyle}" Grid.Row="1" Grid.ColumnSpan="2">
+                                <ItemsPresenter Grid.Row="1" Margin="5" />
+                            </ScrollViewer>-->
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
+    
+    <!--<UserControl x:Class="Infragistics.SamplesBrowser.Controls.LandingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="700">
+    
+    <Grid Background="Transparent" 
+          HorizontalAlignment="Stretch" 
+          VerticalAlignment="Stretch" Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Image x:Name="controlLogo" Height="130" Width="130" Source="{Binding ControlImagePath}" Visibility="Visible" Stretch="Uniform" HorizontalAlignment="Center" Margin="20" VerticalAlignment="Top" Grid.Column="0" />
+         
+        <Grid x:Name="controlName" Height="130" HorizontalAlignment="Left" Margin="20" d:LayoutOverrides="HorizontalAlignment" Grid.Column="1" VerticalAlignment="Center">
+            <Grid Margin="0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding ControlNamePrefix}" TextWrapping="Wrap" d:LayoutOverrides="Height" Foreground="{DynamicResource ControlWelcomeForeground2}" FontSize="32" VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding ControlName}" TextWrapping="Wrap" d:LayoutOverrides="Height" Foreground="{DynamicResource ControlWelcomeForeground}" FontSize="32" VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+         
+        <Grid x:Name="text" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1" Margin="20,0,20,20">
+            <ScrollViewer Margin="0" VerticalScrollBarVisibility="Auto">
+                <TextBlock xml:space="preserve" FontSize="14.667" TextWrapping="Wrap" Foreground="#FF595959" d:LayoutOverrides="HorizontalAlignment" Width="Auto" Height="Auto">
+                    <TextBlock Text="{Binding ControlDescription}" TextWrapping="Wrap" /></TextBlock>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>-->

@@ -1,0 +1,16 @@
+﻿<Window x:Class="WpfApplication6.DamageRateOfGrain"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DamageRateOfGrain" Height="634" Width="712" Opacity="0.3" Background="AntiqueWhite" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Grid >
+        <StackPanel Name="page">
+                <Label HorizontalAlignment="Center"  Content="谷蠹和米象对小麦的虫蚀粒和千粒重影响" Foreground="Black" Background="Blue"  FontSize="40" ></Label>
+            
+            <Button Content="Button" Height="23" Name="button1" Width="75" />
+            <Button Content="Button" Height="23" Name="button3" Width="75" />
+        </StackPanel>
+        <!--<Frame NavigationUIVisibility="Hidden" Source="MainWindow.xaml"></Frame>-->
+        <Button Height="100" Width="100" Click="Button_Click"></Button>
+        <Button Content="Button" Height="23" Name="button2" Width="75" Click="button2_Click" />
+    </Grid >
+</Window>

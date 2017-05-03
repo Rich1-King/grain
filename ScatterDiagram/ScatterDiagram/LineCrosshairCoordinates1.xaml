@@ -1,0 +1,362 @@
+﻿<igFramework:SampleContainer x:Class="ScatterDiagram.LineCrosshairCoordinates1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+        d:DesignHeight="398" d:DesignWidth="783"
+      Title="ChartCrosshairCoordinates Page"
+      xmlns:controls="clr-namespace:ScatterDiagram"
+      xmlns:ig="http://schemas.infragistics.com/xaml"
+      xmlns:igFramework="clr-namespace:Infragistics.Samples.Framework;assembly=Infragistics.Samples.Framework"
+      xmlns:local="clr-namespace:ScatterDiagram"
+      xmlns:models="clr-namespace:ScatterDiagram"
+      xmlns:functions="clr-namespace:Infragistics.Samples.Shared.Models;assembly=Infragistics.Samples.Shared"          
+      xmlns:model="clr-namespace:Infragistics.Samples.Shared.Models;assembly=Infragistics.Samples.Shared"
+      xmlns:resources="clr-namespace:ScatterDiagram"
+      xmlns:other="clr-namespace:DataMember;assembly=DataMember">
+
+    <igFramework:SampleContainer.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- load IG theme  -->
+                <ResourceDictionary Source="/ScatterDiagram;component/IG/IG.xamDataChart.xaml" />
+                <!-- this loads IG styles for MS controls -->
+                <ResourceDictionary Source="/ScatterDiagram;component/Assets/Global.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <other:DataSource x:Key="CategoryData" />
+            <other:DataSource x:Key="ScatterData" />
+            <resources:DataChartStrings x:Key="Strings" />
+            <ig:StringFormatConverter x:Key="StringFormatConverter" />
+            <model:NumericDataModel x:Key="LinearFunctionData">
+                <model:NumericDataModel.Function>
+                    <functions:LinearFunction DataPoints="5" ValueStart="20"/>
+                </model:NumericDataModel.Function>
+            </model:NumericDataModel>
+            <DropShadowEffect x:Key="MarkerEffect" ShadowDepth="1" BlurRadius="5" />
+        </ResourceDictionary>
+    </igFramework:SampleContainer.Resources>
+
+
+    <Grid x:Name="LayoutRoot" Background="White"  Loaded="Grid_Loaded">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="155*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="Silver" BorderThickness="2" Background="#FFF1F1F1">
+            <Grid >     
+                    <Label x:Name="labTitle" Content="米象--时间与粮温曲线图" FontSize="20" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+         
+                <!--<Grid  Grid.Column="1">
+                    <RadioButton Content="米象" x:Name="butRice" FontSize="15" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" IsChecked="True"/>
+                </Grid>
+                <Grid Grid.Column="2" >
+                    <RadioButton Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" FontSize="15"/>
+                </Grid>
+                <Grid Grid.Column="3">
+                    <RadioButton Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click"  FontSize="15"/>
+                </Grid>
+                <Grid Grid.Column="4">
+                    <RadioButton Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"  FontSize="15"/>
+                </Grid>-->
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Silver" BorderThickness="2" Background="#FFF1F1F1">
+            <Grid Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="783*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="38*"/>
+                        <ColumnDefinition Width="81*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="时间:" VerticalAlignment="Center" Height="23" Width="37" FontSize="11"/>
+                    <Grid Grid.Column="1" x:Name="grid">
+                        <TextBox x:Name="CategoryXCoordinateTextBlock"     HorizontalAlignment="Stretch"  TextWrapping="Wrap" VerticalAlignment="Stretch"  BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="{Binding}" Height="{Binding}" FontSize="11"/>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13*"/>
+                        <ColumnDefinition Width="27*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label HorizontalAlignment="Center" VerticalAlignment="Center"  Content="粮温:" FontSize="11" VerticalContentAlignment="Center"  Height="23" Width="37" />
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox x:Name="CategoryYCoordinateTextBlock" HorizontalAlignment="Stretch"  TextWrapping="Wrap" VerticalAlignment="Stretch"  BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="{Binding}" Width="{Binding}" FontSize="11"/>
+                    </Grid>
+                </Grid>
+                <Grid Name="display" Grid.Column="2" Loaded="display_Load"/>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="129*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="1097*"/>
+            </Grid.ColumnDefinitions>
+            <ig:XamDataChart Name="CategoryChart"  HorizontalZoomable="True" HorizontalZoombarVisibility="Visible" VerticalZoomable="True" VerticalZoombarVisibility="Visible"
+                         MouseMove="OnCategoryChartMouseMove"
+                         CrosshairVisibility="Visible" Grid.Row="0" Grid.Column="1">
+                <ig:XamDataChart.Axes>
+                    <ig:CategoryDateTimeXAxis x:Name="categoryXAxis"  
+                      DisplayType="Continuous"
+                                          DateTimeMemberPath="date"  Label="{}{date:MM/dd}" Interval="7">
+                        <ig:CategoryDateTimeXAxis.LabelSettings>
+                            <ig:AxisLabelSettings Location="OutsideBottom"  Angle="1" Extent="13" VerticalAlignment="Center" HorizontalAlignment="Center"></ig:AxisLabelSettings>
+                        </ig:CategoryDateTimeXAxis.LabelSettings>
+                    </ig:CategoryDateTimeXAxis>
+                    <ig:NumericYAxis x:Name="numericYAxis" MinimumValue="20" MaximumValue="40">
+                        <ig:NumericYAxis.LabelSettings >
+                            <ig:AxisLabelSettings Visibility="Visible" HorizontalAlignment="Center" ></ig:AxisLabelSettings>
+                        </ig:NumericYAxis.LabelSettings>
+                    </ig:NumericYAxis>
+                </ig:XamDataChart.Axes>
+                <ig:XamDataChart.Series>
+                    <ig:SplineSeries Name="colCorn" Title="{Binding y1Lable1,Source={StaticResource CategoryData}}" ItemsSource="{StaticResource CategoryData}" 
+                               MarkerType="Circle" Thickness="3"
+                               XAxis="{Binding  ElementName=categoryXAxis}" 
+                               YAxis="{Binding  ElementName=numericYAxis}"
+                                   Visibility="Hidden"
+                               ValueMemberPath="GrainTemp"
+                                   Brush="#8D8D8D">
+                        <ig:SplineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="Gray"  BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:SplineSeries.MarkerTemplate>
+                        <ig:SplineSeries.ToolTip>
+
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding y1Lable1,Source={StaticResource CategoryData}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock Name="textY"  Text="{Binding Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y, Converter={StaticResource StringFormatConverter}, ConverterParameter='0.0'}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:SplineSeries.ToolTip>
+
+                    </ig:SplineSeries>
+
+
+                    <ig:SplineSeries Name="colRice" Brush="Black"
+                               MarkerType="Square" Thickness="3"
+                               XAxis="{Binding  ElementName=categoryXAxis}"
+                               YAxis="{Binding ElementName=numericYAxis}"
+                               ValueMemberPath="GrainTemp"  Visibility="Visible">
+                        <ig:SplineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="Gray"  BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:SplineSeries.MarkerTemplate>
+                        <ig:SplineSeries.ToolTip>
+
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding y2Lable1,Source={StaticResource CategoryData}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock   Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock Name="textLow"  Text="{Binding Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:SplineSeries.ToolTip>
+                    </ig:SplineSeries>
+
+                    <ig:SplineSeries Name="colTCC" Brush="Red"
+                               MarkerType="Triangle"  Thickness="3"
+                               XAxis="{Binding ElementName=categoryXAxis}"
+                               YAxis="{Binding ElementName=numericYAxis}"
+                               ValueMemberPath="GrainTemp" Visibility="Hidden" >
+                        <ig:SplineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="Gray" BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:SplineSeries.MarkerTemplate>
+                        <ig:SplineSeries.ToolTip>
+
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding y3Lable1,Source={StaticResource CategoryData}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock   Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock Name="textTC"  Text="{Binding  Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:SplineSeries.ToolTip>
+                    </ig:SplineSeries>
+
+
+                    <ig:SplineSeries Name="colGrain" Brush="#206B95"
+                               MarkerType="Diamond" Thickness="3"
+                               XAxis="{Binding ElementName=categoryXAxis}"
+                               YAxis="{Binding ElementName=numericYAxis}"
+                               ValueMemberPath="GrainTemp"  Visibility="Hidden">
+                        <ig:SplineSeries.MarkerTemplate>
+                            <DataTemplate>
+                                <Grid Width="40" Height="25" Margin="0,0,0,0">
+                                    <Border CornerRadius="5" Background="Gray"  BorderBrush="{Binding Series.ActualMarkerOutline}" BorderThickness="0.5">
+                                        <TextBlock Margin="2"
+                                               Text="{Binding Item.GrainTemp}"
+                                               Foreground="White"
+
+                                               FontSize="12"
+                                               HorizontalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ig:SplineSeries.MarkerTemplate>
+                        <ig:SplineSeries.ToolTip>
+
+                            <Grid>
+                                <StackPanel Orientation="Vertical" >
+                                    <TextBlock Margin="2" FontWeight="Bold" Text="{Binding yLable1,Source={StaticResource CategoryData}}"></TextBlock>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel Margin="2">
+                                            <TextBlock Text="室温:"></TextBlock>
+                                            <TextBlock Text="粮温:"></TextBlock>
+                                            <TextBlock Text="头数:"></TextBlock>
+                                            <TextBlock Text="时间:"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Margin="2">
+                                            <TextBlock  Text="{Binding Item.InTemp}"></TextBlock>
+                                            <TextBlock  Text="{Binding Item.GrainTemp}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.Y}"></TextBlock>
+                                            <TextBlock Text="{Binding Item.date}"></TextBlock>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </ig:SplineSeries.ToolTip>
+                    </ig:SplineSeries>
+                </ig:XamDataChart.Series>
+            </ig:XamDataChart>
+            <!--<Label Content="粮&#xD;&#xA;温"  HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="22" Grid.Column="3" Grid.Row="5" />
+        <Label Content="时间" HorizontalAlignment="Center" VerticalAlignment="Center" Width="34" Height="25" Grid.Column="4" Grid.Row="9"/>
+        <Label x:Name="labTitle" FontSize="18" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="32" Margin="116,10,0,0" VerticalAlignment="Top" Width="335" Grid.Column="4" Grid.RowSpan="2"/>
+
+        <Button Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center"   Click="Button_Click" Grid.Row="5" Grid.Column="0" Height="40" Width="66"   />
+
+        <Button Content="米象" x:Name="butRice" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="Button_Click" Grid.Column="1" Grid.Row="5" Height="40" Width="66"/>
+
+        <Button Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="66" Height="40" Click="Button_Click" Grid.Row="6" Grid.Column="0" />
+
+        <Button Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="66" Height="40" Click="Button_Click" Grid.Row="6" Grid.Column="1"/>
+
+        <Label HorizontalAlignment="Right" Content="时间:" VerticalAlignment="Center" Grid.Row="0" FontSize="16"  Height="30" Width="48"/>
+        <TextBox  x:Name="CategoryXCoordinateTextBlock" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Center"  Width="126" Grid.Row="0" Grid.Column="1" BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5" Height="30" Margin="0,3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        <Label HorizontalAlignment="Right" VerticalAlignment="Center" Width="48" Content="粮温:" Grid.Row="1" FontSize="16" Margin="0,3" Height="30"/>
+        <TextBox x:Name="CategoryYCoordinateTextBlock" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Center"  Width="126" Grid.Row="1" Grid.Column="1" BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5" Height="30" Margin="0,3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+        <Label Content="粮温区间:" HorizontalAlignment="Right" Height="37" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="81" Grid.Row="3" Grid.Column="0" Margin="0,7" FontSize="16"/>
+        <TextBox BorderBrush="Aqua" IsReadOnly="True" BorderThickness="1.5"  HorizontalAlignment="Left" Height="37"  TextWrapping="Wrap" Text="21.5~35" VerticalAlignment="Center"  Width="128"  Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="Gray" Margin="0,7" FontSize="16"/>
+
+        <Label Content="虫类:" HorizontalAlignment="Right" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="16" Height="37" VerticalAlignment="Center" Width="48" Grid.Row="4" Margin="0,10"/>
+        <TextBox BorderBrush="Aqua" BorderThickness="1.5" IsReadOnly="True" x:Name="textName"  HorizontalAlignment="Left" Height="37" TextWrapping="Wrap" VerticalAlignment="Center" Width="126" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.Column="1" Grid.Row="4" Foreground="Gray" Margin="0,10"/>
+
+
+        <Label x:Name="label" Content="描述:" HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="0" Grid.Row="7" FontSize="16" Foreground="Red" Height="29" Width="46"/>
+        <TextBox BorderBrush="Gray" BorderThickness="3"  VerticalScrollBarVisibility="Visible" x:Name="textDisplay" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" IsReadOnly="True"  Grid.Row="8" Width="249" Height="141" Grid.ColumnSpan="2" TextWrapping="Wrap" Grid.RowSpan="2" Text="此处为描述区"/>
+        <Rectangle Grid.Column="2" Grid.RowSpan="10" Fill="Yellow" StrokeThickness="0"></Rectangle>-->
+            <Grid Grid.Column="1" Grid.Row="1">
+                <Label Content="时间"  HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Margin="368,-8,346,1" Width="55"  />
+            </Grid>
+
+            <Grid   Grid.Column="0" Grid.Row="0" >
+                <Label Content="粮&#xD;&#xA;温" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" Margin="1,140,-9,129" Height="52"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <RadioButton Content="米象" x:Name="butRice" FontSize="15" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" IsChecked="True"/>
+            </Grid>
+            <Grid Grid.Column="1" >
+                <RadioButton Content="玉米象" x:Name="butGrain" HorizontalAlignment="Center"  VerticalAlignment="Center"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click" FontSize="15"/>
+            </Grid>
+            <Grid Grid.Column="2">
+                <RadioButton Content="赤拟谷盗" x:Name="butTcc" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="Button_Click"  FontSize="15"/>
+            </Grid>
+            <Grid Grid.Column="3">
+                <RadioButton Content="谷蠹" x:Name="butCorn" HorizontalAlignment="Center"  VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Click="Button_Click"  FontSize="15"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</igFramework:SampleContainer>
